@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Refered By</title>
+</head>
+<style>
+
+  .button {
+    background-color: #0d9bd3; /* Green */
+    border: none;
+    color: white;
+    padding: 12px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    position: relative;
+
+  }
+  input[type=text], select {
+  width: 15%;
+  padding: 12px 10px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  border-color: #1694d8;
+  box-sizing: border-box;
+  color:#1694d8;
+}
+</style>
+<body>
+{% include 'navigation/topnavbar.html' %}
+<center>
+    <br><br>
+<form method="post" action="referedby">
+    {% csrf_token %}
+    <input type="text" name="names"  placeholder="Referd By" style="margin-left:30%" >
+    <button type="submit" class="button">Add</button>
+</form>
+    {% for i in c %}
+    <h2>{{i.names}}</h2>
+    {% endfor %}
+</center>
+</body>
+</html>

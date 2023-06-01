@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= device-width>, initial-scale=1.0">
+    <title>Documentation</title>
+    
+    <style>table {
+        border-collapse: collapse;
+        width: 80%;
+         
+      }
+      
+      tr {
+        border-bottom: 1px solid rgb(6, 184, 190);
+        border-color: rgb(30, 202, 245);
+        border-collapse: collapse;
+        text-align: center;
+        font-family: 'Segoe UI';
+      }
+      tr:hover {background-color: rgb(248, 244, 242);}
+      .button {
+        background-color: #0d9bd3; /* Green */
+        border: none;
+        color: white;
+        
+        padding: 12px 72px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        position: relative;
+        left: 501px;
+        bottom: 50px;
+      }
+      .button2 {
+        background-color: rgb(23, 151, 66); 
+        color: rgb(250, 249, 249); 
+        position: relative;
+        left: 30px;
+        
+      }
+      
+      .button2:hover {
+        background-color: #008CBA;
+        color: white;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: white;
+      }
+      
+      li {
+        float: right;
+      }
+      
+      li a {
+        display: block;
+        color: #0d9bd3;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: medium;
+        font-weight: 500;
+      }
+      
+      li a:hover {
+        background-color:white;
+      }
+      input[type=text],input[type=password] {
+        width: 50%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid #0A79B6;
+        border-radius: 4px;
+        
+      }
+      .but {
+        background-color: #0A79B6;
+        border: none;
+        color: rgb(47, 47, 48);
+        padding: 12px 28px;
+        width: 20%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 5px 10px; 
+        cursor: pointer;
+      }
+      .box{
+        padding:1rem 1.5rem;
+        width:70%;
+        background: none;
+        border: 2px solid #0A79B6;
+        font-size: 1.6rem;
+        text-transform: none;
+        margin:.7rem 0;
+        border-radius: .5rem;
+        
+    }
+    .container{
+        position: center;
+        width:1400px;
+        height: 800px;
+        left: 150 px;
+        border: 1px solid blue;
+        border-radius: 8px;
+    }
+    tr:hover {background-color: rgb(248, 244, 242);}
+      .but2 {
+        background-color: #0d9bd3; /* Green */
+        border: none;
+        color: white;
+        padding: 12px 72px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        position: absolute;
+    
+        left: 254px;
+      }
+      .but2 {
+        background-color: #008CBA; 
+        color: black; 
+        border: 2px solid #008CBA;
+      }
+      
+      .but2:hover {
+        background-color: #008CBA;
+        color: white;
+      }
+      [type="radio"]:checked,
+      [type="radio"]:not(:checked) {
+          position: absolute;
+          left: -9999px;
+      }
+      [type="radio"]:checked + label,
+      [type="radio"]:not(:checked) + label
+      {
+          position: relative;
+          padding-left: 28px;
+          cursor: pointer;
+          line-height: 20px;
+          display: inline-block;
+          color: #008CBA;
+      }
+      [type="radio"]:checked + label:before,
+      [type="radio"]:not(:checked) + label:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 18px;
+          height: 18px;
+          border: 1px solid #ddd;
+          border-radius: 100%;
+          background: #fff;
+      }
+      [type="radio"]:checked + label:after,
+      [type="radio"]:not(:checked) + label:after {
+          content: '';
+          width: 12px;
+          height: 12px;
+          background: #008CBA;
+          position: absolute;
+          top: 4px;
+          left: 4px;
+          border-radius: 100%;
+          -webkit-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+      }
+      [type="radio"]:not(:checked) + label:after {
+          opacity: 0;
+          -webkit-transform: scale(0);
+          transform: scale(0);
+      }
+      [type="radio"]:checked + label:after {
+          opacity: 1;
+          -webkit-transform: scale(1);
+          transform: scale(1);
+      }
+      input[type=text], select {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-color: #1694d8;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  ::placeholder{
+    color: black;
+  }
+  </style>
+</head>
+
+{% include 'navigation/topnavbar.html' %}
+<body>
+    <center>
+        <br>
+        <br>
+        <br>
+         <div class="container">
+             <br>
+             <br>
+          <button style ="color:rgb(255, 255, 255); " class="but2">Copyright</button>
+          <br>
+          <br>
+          <br>
+          <h2 style ="color:rgb(38, 157, 212) ">Application No: U12345678</h2>
+          <form action="/action_page.php">
+            <select id="Quotation status" name="quotationstatus">
+              <option value="Quotation status" hidden>Quotation status</option>
+              <option value="Quotation sent">Quotation sent</option>
+              <option value="Agreed quotation">Agreed quotation</option>
+              <option value="PO Released">PO Released</option>
+            </select>
+          
+            <input type="text" id="fname" name="quotedamount" placeholder="Quoted amount"><br>
+            <select id="To assign team" name="toassignteam">
+              <option value="To assign team" hidden>To assign team</option>
+              <option value="CR Admin">CR Admin</option>
+              <option value="Others">Others</option>
+            </select>
+          
+            <input type="text" id="fname" name="projectduedate" placeholder="Project due date"><br>
+          <form action="#">
+          
+          <br>
+          <br>
+          <form action="#">
+            <p>
+              
+              <h3 style ="color:rgb(38, 157, 212) ">Copyright Completed: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" id="test1" name="copyrightcompleted" >
+              <label for="test1">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              
+              <input type="radio" id="test2" name="copyrightcompleted">
+              <label for="test2">No</label> </h3>
+            
+            </p>
+            
+          </form>
+          <br>
+          <br>
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <button  class="button button2">SUBMIT</button>
+          
+      
+      </div>
+      </center>
+</body>
+</html>

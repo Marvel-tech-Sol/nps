@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="copyright.css">
+    <title>Document</title>
+    <style>
+    table {
+  width: 75%;
+  border: 1px solid #1694d8;
+
+  color: #1694d8;
+    }
+    th, td {
+  padding: 15px;
+}
+th{
+    border-bottom: 1px solid #1694d8;
+    text-align: left;
+}
+    </style>
+
+</head>
+{% include 'navigation/topnavbar.html' %}
+<body>
+  <button style="margin-left: 10%;background-color: #1694d8;padding:10px;color: white;">Documentation</button>
+        <table style="margin-top:5%;margin-left:15%; align :center;">
+            <tr >
+                <th>Date</th>
+              <th>Application No.</th>
+              <th>Title</th>
+             </tr>
+            {% for i in r %}
+            <td>{{i.date}}</td>
+            <tr>            <td>
+                {{i.uid}}
+            </td>
+            <td>{{i.title}}</td>
+
+                <td><a href="{% url 'documentationstatus/' i.uid %}" class="btn">Edit</a></td></tr>
+            {% endfor %}
+            </tr>
+          </table>
+</body>
+</html>

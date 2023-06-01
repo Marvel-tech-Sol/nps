@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="copyright.css">
+    <title>Document</title>
+  <style>
+    *
+    {
+    font-size:14px;
+    }
+    table {
+    width:75%;
+  border: 1px solid #1694d8;
+
+  color: #1694d8;
+    }
+    th, td {
+  padding: 15px;
+}
+th{
+    border-bottom: 1px solid #1694d8;
+    text-align: left;
+}
+
+</style>
+
+</head>
+
+{% include 'navigation/topnavbar.html' %}
+<body>
+  <button style="margin-left: 10%;background-color: #1694d8;padding:10px;color: white;">NOVELTY SEARCH</button>
+        <table align="center" style="margin-top:4%;">
+            <tr >
+                <th>Date</th>
+              <th>Title.</th>
+              <th>Organization</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+            {% for i in r %}
+            {% for j in NoveltyStatus %}
+            {% if i.uid == j.uid %}
+            <tr>
+                <td>{{i.date}}</td>
+            <td>{{i.title}}</td>
+            <td>{{i.organisation}}</td>
+                {% if j.status %}
+                <td style="color:green;">Completed</td>
+                {% else %}
+                <td style="color:red;">Pending</td>
+                {% endif %}
+                <td><a href="{% url 'patentabilitysearchstatus/' i.uid %}" style="background-color: #1694d8;padding:10px;text-decoration:none ;color: white;border-color: #1694d8;"  class="btn">Edit</a></td></tr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+
+
+        
+
+          </table>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+     .button {
+    background-color: #1694d8;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .top li {
+    display: inline-block;
+    font-size: 20px;
+    padding: 20px;
+  }
+  input[type=text],input[type=date], select {
+    width: 40%;
+    padding: 7px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-color: #1694d8;
+    border-radius: 2px;
+    box-sizing: border-box;
+  }
+</style>
+{% include 'navigation/topnavbar.html' %}
+<body>
+    <ul class="top">
+        <li><button class="button">New Application</button></li>
+        <li style="color:#1694d8; margin-left:350px;font-weight: bolder;">PATENT APPLICATION</li>
+    </ul>
+    <center><div >
+        <form action="patentapplication" method="post">
+            {% csrf_token %}
+            <input type="checkbox" id="Drafting" name="check[]" value="drafting">
+            <label for="Drafting"> Drafting(Provisional)</label>
+            <input type="checkbox" id="Drawing" name="check[]" value="drawing">
+            <label for="Drawing"> Drawing</label>&ensp;&ensp;
+            <input type="checkbox" id="Novelty Search" name="check[]" value="novelty search">
+            <label> Novelty Search</label>&ensp;&ensp;
+            <input type="checkbox" id="Documentation" name="check[]" value="documentation">
+            <label for="Documentation">Documentation</label>&ensp;&ensp;
+            <input type="checkbox" id="Idea Development" name="check[]" value="Idea Development">
+            <label for="Idea Development"> Idea Development</label>&ensp;&ensp;
+            <input type="checkbox" id="Novelty search & Prov. Draft" name="check[]" value="Novelty search & Prov. Draft">
+            <label for="Novelty search & Prov. Draft"> Novelty search & Prov. Draft</label>&ensp;&ensp;
+            <input type="checkbox" id="FER Reply" name="check[]" value="FER Reply"> 
+            <label for="FER Reply"> FER Reply</label>&ensp;&ensp;<br><br>
+            <input type="checkbox" id="Hearing" name="check[]" value="Hearing"> 
+            <label for="Hearing"> Hearing</label>&ensp;&ensp;
+            <input type="checkbox" id="Renewals" name="check[]" value="Renewals"> 
+            <label for="Renewals"> Renewals</label>&ensp;&ensp;
+            <input type="checkbox" id="PCT Application" name="check[]" value="PCT Application"> 
+            <label for="PCT Application"> PCT Application</label>&ensp;&ensp;
+            <input type="checkbox" id="Con. Patent" name="check[]" value="Con. Patent"> 
+            <label for="Con. Patent"> Con. Patent</label>&ensp;&ensp;
+            <input type="checkbox" id="others" name="check[]" value="others"> 
+            <label for="others"> Others</label>&ensp;&ensp;
+
+            <br>
+<div style="width:100%;display:flex;flex-wrap:wrap;margin:20px;justify-items:space-between;margin-left:40px">
+          <input style="margin:10px;width:20%;" type="date" id="fname" name="date" placeholder="Date">
+          <input style="margin:10px;width:30%;" type="text" id="fname" name="title" placeholder="Title"><br>
+          <input style="margin:10px;width:20%;" type="text" id="fname" name="organization" placeholder="Organization"><br>
+          <select style="margin:10px; width:20%;" id="mode of contact" name="modeofcontact">
+            <option style="margin:10px;width:20%;" value="mode of contact" hidden>mode of contact</option>
+            <option value="online">Online</option>
+            <option value="offline">Offline</option>
+          </select>
+          <select style="margin:10px;width:20%;" id="Refered By" name="referedby">
+            <option value="Refered By" hidden>Refered by</option>
+             {% for i in ref %}
+              <option value="{{i}}">{{i}}</option>
+              {% endfor %}
+          </select>
+          <input style="margin:10px;width:20%;" type="text" id="fname" name="Client Name" placeholder="Client Name"><br>
+          <input style="margin:10px;width:30%;" type="text" id="fname" name="Project title" placeholder="Project title"><br>
+          <input style="margin:10px;width:20%;" type="text" id="fname" name="contactnumber" placeholder="Contact Number"><br>
+          <input  style="margin:10px;width:30%;" type="text" id="fname" name="emailid" placeholder="Email id"><br>
+<select id="=assignto" name="assignto" style="margin:10px;width:20%;">
+            <option value="assign to" hidden>Assign To</option>
+              {% for i in user %}
+              <option value="{{i.username}}">{{i.name}} - {{i.teamname}}</option>
+              {% endfor %}
+</select>
+    <select id="ndastatus" name="ndastatus" style="margin:10px;width:20%;">
+            <option value="Status" hidden>NDAs status</option>
+            <option value="Signed NDA Sent">Signed NDA Sent</option>
+            <option value="Signed copy received (Both)">Signed copy received (Both)</option>
+            <option value="Existing client">Existing client</option>
+            <option value="MoU signed institute/entity)">MoU signed institute/entity</option>
+          </select>
+    <select id="idfstatus" name="idfstatus" style="margin:10px;width:20%;">
+            <option value="" hidden>IDF status</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            </select>
+    <select id="quastatus" name="quastatus" style="margin:10px;width:20%;">
+            <option value="" hidden>Quotation Status</option>
+            <option value="Sent Quotation">Sent Quotation</option>
+            <option value="agreed">Agreed Quotation</option>
+            <option value="PO Released">PO Released</option>
+            </select>
+</div>
+    <button style=" float:right;margin-right:20%;padding:8px 20px;" class="button" type="submit">Submit</button></form></div></center>
+
+</body>
+</html>

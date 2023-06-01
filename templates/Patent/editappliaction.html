@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <title>Edit Application</title>
+    <link rel="shortcut icon" type="image" href="img/logo.png"/>
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="users.css">
+    <link rel="stylesheet" href="formtype2.css">
+    <link rel="stylesheet" href="rbox2.css">
+    <link href='https://fonts.googleapis.com/css?family=Solway' rel='stylesheet'>
+</head>
+<style>
+input[type=text],input[type=date], select {
+    width: 40%;
+    padding: 7px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-color: #1694d8;
+    border-radius: 2px;
+    box-sizing: border-box;
+  }
+  .but2 {
+    background-color: #1694d8;
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  p
+  {
+  font-size: 17px;
+  font-weight:bold;
+  }
+</style>
+<body>
+{% include 'navigation/topnavbar.html' %}
+<br>
+  <center> <p style ="color:rgb(38, 157, 212);">Application No:  {{app.uid }}</p> </center>
+<center>
+    <!------ Details------>
+   <div class="container" style="top:10px;width:100%;display:flex;flex-wrap:wrap;margin:20px;justify-items:space-between;margin-left:40px">
+
+           <p style ="color:rgb(38, 157, 212);margin:10px;">Type:</p>
+        <input type="text" id="fname"  value="{{app.patenttype}}" disabled placeholder="Type" style="margin:10px;width:20%;"><br>
+       <p style ="color:rgb(38, 157, 212);margin:10px;">Title :</p>
+        <label for="lname"></label>
+        <input type="text" id="lname" name="lname" placeholder=" Title" disabled value="{{app.title}}" style="margin:10px;width:20%;"><br>
+       <p style ="color:rgb(38, 157, 212);margin:10px;"> organization :</p>
+        <input type="text" id="fname" name="" value="{{app.organisation}}" disabled placeholder="Organization" style="margin:10px;width:20%;"><br>
+  <br>
+   </div>
+    <!-- end details -->
+</center>
+<hr>
+<center>
+    <div style="width:100%;flex-wrap:wrap;margin:20px;justify-items:space-between;margin-left:40px;margin-botton:0;">
+    {% if assign.assignstatus %}
+        <form action="{% url 'assignto' %}" method="post">
+            {% csrf_token %}
+    <p style="margin:10px;width:20%;">Assigned to:<span style="color:rgb(38, 157, 212);font-size:20px; ">{{assign.assignto}}</span></p>
+            <input type="text" value="{{app.uid}}" name="uid" hidden>
+    <select id="=assignto" name="assignto" style="margin:10px;width:20%;">
+            <option value="assign to" hidden>Assign To</option>
+              {% for i in user %}
+              <option value="{{i.username}}">{{i.name}} - {{i.teamname}}</option>
+              {% endfor %}
+</select>
+            <button type="submit" class="but2" style="margin:10px;width:10%;padding:8px 20px; margin-bottom:0;">Submit</button>
+        </form>
+
+    {% endif %}
+    </div>
+</center>
+<hr><!-- NDA  -->
+<center>
+    <div class="container2">
+
+     <p style="">NDA</p>
+        {% if  ndastatus.status %}
+        <p style="color:green;">{{ndastatus.nda}}</p>
+<!--        <form action="{% url 'ndastatus' %}" method="post">-->
+<!--              {% csrf_token %}-->
+<!--            <input name="uid" value="{{app.uid}}" hidden>-->
+<!--            <select id="ndastatus" name="status">-->
+<!--            <option value="Status" hidden>NDAs status</option>-->
+<!--            <option value="Signed NDA Sent">Signed NDA Sent</option>-->
+<!--            <option value="Signed copy received (Both)">Signed copy received (Both)</option>-->
+<!--            <option value="Existing client">Existing client</option>-->
+<!--            <option value="MoU signed institute/entity)">MoU signed institute/entity</option>-->
+<!--          </select>-->
+
+<!--            <button style ="color:rgb(255, 255, 255) " class="but2" type="submit">Submit</button>-->
+<!--          </form>-->
+        {% else %}
+        <form action="{% url 'ndastatus' %}" method="post">
+              {% csrf_token %}
+            <input name="uid" value="{{app.uid}}" hidden>
+            <select id="ndastatus" name="status">
+            <option value="Status" hidden>NDA status</option>
+            <option value="Signed NDA Sent">Signed NDA Sent</option>
+            <option value="Signed copy received (Both)">Signed copy received (Both)</option>
+            <option value="Existing client">Existing client</option>
+            <option value="MoU signed institute/entity)">MoU signed institute/entity</option>
+          </select>
+
+            <button style ="color:rgb(255, 255, 255) " class="but2" type="submit">Submit</button>
+          </form>
+        {% endif %}
+    </div>
+</center>
+<hr>
+<br>
+<!-- end NDA -->
+<!-- novelty  -->
+<center>
+      {% if app.patenttype == 'full' or app.patenttype == 'novelty search'  %}
+
+    <div class="container">
+        <br>
+        <br>
+     <button style ="color:rgb(255, 255, 255) " class="but2">Patentablity Search</button>
+         {% if NoveltyStatus.status %}
+    <p style="color:green;font-size:18px;margin-left:20px; ">Novelty Completed</p>
+    <div style="width:50%;display:flex;flex-wrap:wrap;justify-items:space-between;margin-left:40px;overflow:hidden;">
+      <label
+          style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Due Date</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{NoveltyStatus.duedate}}</p>
+       <label
+          style='align-items: center;font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Rating</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{NoveltyStatus.rating}}</p>
+       <label
+          style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Q.C.</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{NoveltyStatus.qc}}</p>
+       <label
+          style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Assign To</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{NoveltyStatus.assignto}}</p>
+    </div>
+    {% endif %}
+    <form action="{% url 'NoveltyStatus' %}" method="post">
+      <div style="width:100%;display:flex;flex-wrap:wrap;justify-items:space-between;margin-left:40px;overflow:hidden;">
+        {% csrf_token %}
+        <input name="uid" value="{{app.uid}}" hidden>
+        <label style='align-items: center;margin-top: 1%; font-size: 16px;color: #0d9bd3;font-weight: bold;'>Assign
+          To</label><input type="text" id="fname" style="margin:10px;width:10%;" name="assignto"
+          placeholder="Assign to" >
+        <label style='align-items: center;margin-top: 1%; font-size: 16px;color: #0d9bd3;font-weight: bold;'>Due
+          Date:</label> <input type="date" id="fname" style="margin:10px;width: 10%;" name="duedate"
+          placeholder="Due Date" value="{{NoveltyStatus.duedate}}">
+        <label
+          style='align-items: center;margin-top: 1%; font-size: 16px;color: #0d9bd3;font-weight: bold;'>Rating</label>
+        <select id="idfstatus" name="rating" style="margin:10px;width:15%;">
+          <option value="" hidden>Rating</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+        <label style='align-items: center;margin-top: 1%; font-size: 16px;color: #0d9bd3;font-weight: bold;'>Quality
+          Check</label>
+        <select id="idfstatus" name="qc" style="margin:10px;width:15%;">
+          <option value="" hidden>QC Status</option>
+          <option value="completed">Completed</option>
+          <option value="In Progress">In Progress</option>
+          <option value="not Started">Not Started</option>
+        </select>
+
+
+      </div>
+      <button class="but2" style=" float:right;margin-right:20%;padding:8px 20px;margin-top: 1%;"
+        type="submit">Novelty
+        Completed</button>
+    </form></div><hr>
+
+
+    {% endif %}
+
+    <!-- end novelty  -->
+</center>
+<br>
+
+<center>
+    <!-- drafting  -->
+    {% if app.patenttype == 'full' or app.patenttype == 'drafting' %}
+    <div class="container">
+        <br>
+        <br>
+     <button style ="color:rgb(255, 255, 255) " class="but2">Drafting</button>
+     {% if DraftingStatus.status %}
+        <p style="color:green;">Drafting Completed</p>
+        {% else %}
+        <form action="{% url 'DraftingStatus' %}" method="post">
+          {% csrf_token %}
+          <input name="uid" value="{{app.uid}}" hidden>
+         <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Drafting Completed</button>
+      </form></div><hr>
+    <!--<br>
+         <h3 style="color:green;">Drafting completed</h3>
+
+        <h3 style="color:red;">Drafting not Completed</h3>
+    </div><hr>-->
+    {% endif %}
+        {% endif %}
+<!-- end drafting -->
+</center>
+
+<br>
+<center>
+    <!-- drawing -->
+    {% if app.patenttype == 'full' or app.patenttype == 'drawing' %}
+    <div class="container">
+        <br>
+        <br>
+     <button style ="color:rgb(255, 255, 255) " class="but2">Drawing</button>
+     {% if DrawingStatus.status %}
+        <p style="color:green;">Drawing Completed</p>
+        {% else %}
+        <form action="{% url 'DrawingStatus' %}" method="post">
+          {% csrf_token %}
+          <input name="uid" value="{{app.uid}}" hidden>
+         <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Drawing Completed</button>
+      </form></div><hr>
+    <!--<br>
+        <h3 style="color:green;">Drawing completed</h3>
+
+        <h3 style="color:red;">Drawing not Completed</h3><hr>-->
+       {% endif %}
+    {% endif %}
+    </div>
+    <!-- end drawing  -->
+</center>
+<br>
+
+<center>
+    <!-- documentation -->
+    {% if app.patenttype == 'full' or app.patenttype == 'documentation' %}
+    <div class="container">
+        <br>
+        <br>
+     <button style ="color:rgb(255, 255, 255) " class="but2">Documentation</button>
+     {% if DocumentationStatus.status %}
+        <p style="color:green;">Documentation Completed</p>
+        {% else %}
+        <form action="{% url 'DocumentationStatus' %}" method="post">
+          {% csrf_token %}
+          <input name="uid" value="{{app.uid}}" hidden>
+         <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Documentation Completed</button>
+      </form></div><hr>
+    <!--<br ><h3 style="color:green;">Documentation completed</h3>
+
+        <h3 style="color:red;">Documentation not Completed</h3>
+          <hr>-->
+        {% endif %}
+        {% endif %}
+
+    </div>
+    <!-- end documentation -->
+</center>
+<br>
+
+<center>
+    <!-- filing -->
+    {% if app.patenttype == 'full' or app.patenttype == 'filing' %}
+    <div class="container">
+        <br>
+        <br>
+        <button style ="color:rgb(255, 255, 255) " class="but2">Filing</button><br>
+        {% if  FilingStatus.status %}
+        <p style="color:green;">Filed</p>
+        {% else %}
+      <form action="{% url 'FilingStatus' %}" method="post">
+          {% csrf_token %}
+          <input name="uid" value="{{app.uid}}" hidden>
+         <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Filed</button>
+      </form></div><hr>
+    {% endif %}
+    {% endif %}
+</center>
+<br>
+
+<center>
+    <!-- examination  -->
+    {% if app.patenttype == 'full' or app.patenttype == 'examination' %}
+    <div class="container">
+        <br>
+        <br>
+     <button style ="color:rgb(255, 255, 255) " class="but2">Examination</button>
+        {% if ExaminationStatus.status %}
+        <p style="color:green;">Examination Completed</p>
+        {% else %}
+        <form action="{% url 'ExaminationStatus' %}" method="post">
+          {% csrf_token %}
+          <input name="uid" value="{{app.uid}}" hidden>
+         <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Examination Completed</button>
+      </form></div><hr>
+        <!-- <form>
+            <p style ="color:rgb(38, 157, 212) ">
+            <label for="fname"></label>
+            <input type="date" id="fname" name="" placeholder="Examination Date"><br> </p>
+            <p style ="color:rgb(38, 157, 212) ">
+            </p>
+            <button  style ="color:rgb(255, 255, 255);background-color:green; " class="but2">Submit</button>
+         </form></div><hr>-->
+    {% endif %}
+    {% endif %}
+</center>
+<br>
+
+<center>
+    <!-- FER  -->
+    {% if app.patenttype == 'full' or app.patenttype == 'FER' %}
+    <div class="container">
+        <br>
+        <br>
+     <button style ="color:rgb(255, 255, 255) " class="but2">FER</button>
+    {% if FerStatus.status %}
+        <p style="color:green;">Fer Completed</p>
+        {% else %}
+        <form action="{% url 'FerStatus' %}" method="post">
+          {% csrf_token %}
+          <input name="uid" value="{{app.uid}}" hidden>
+         <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Fer Completed</button>
+      </form></div><hr>
+    <!-- <form>
+        <p style ="color:rgb(38, 157, 212) ">
+        <label for="fname"></label>
+        <input type="date" id="fname" name="" placeholder="FER Date"><br> </p>
+        <p style ="color:rgb(38, 157, 212) ">
+        </p>
+        </form>
+       <br>
+        <button  style ="color:rgb(255, 255, 255);background-color:green; " class="but2">Submit</button>
+    </div><hr>-->
+    {% endif %}
+    {% endif %}
+</center>
+<br>
+
+<center>
+    <!-- hearing  -->
+    {% if app.patenttype == 'full' or app.patenttype == 'hearing' %}
+    <div class="container">
+        <br>
+        <br>
+     <button style ="color:rgb(255, 255, 255) " class="but2">Hearing</button>
+    {% if HearingStatus.status %}<br>
+        <input type="date" value="{{HearingStatus.date}}"   disabled>
+        <p style="color:green;">Hearing Completed</p>
+        {% else %}
+        <form action="{% url 'HearingStatus' %}" method="post">
+          {% csrf_token %}
+          <input name="uid" value="{{app.uid}}" hidden><br>
+          <input name="date" type="date">
+         <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Hearing Completed</button>
+      </form></div><hr>
+     <!--<form>
+         <p style ="color:rgb(38, 157, 212) "></p>
+        <label for="fname"></label>
+        <input type="date" id="fname" name="" placeholder="Hearing Date"><br> </p>
+         <p style ="color:rgb(38, 157, 212) "></p>
+        </form>
+        <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" >Submit</button>
+    </div>
+<hr>-->
+    {% endif %}
+    {% endif %}
+</center>
+<br>
+
+<center>
+    <!--  payment -->
+    <div class="container">
+     <button style ="color:rgb(255, 255, 255) " class="but2">Payment status</button>
+     <br>
+     <br>
+     {% if PaymentStatus.status %}
+        <h3 style="color:green;">Payment Recieved</h3>
+        {% else %}
+        <h3 style="color:red;">Payment not recieved</h3>
+         <form action="{% url 'PaymentStatus' %}" method="post">
+          {% csrf_token %}
+          <input name="uid" value="{{app.uid}}" hidden>
+          <input name="amount" type="number" >
+         <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Payment Recieved</button>
+      </form><hr>
+        {% endif %}
+    </div>
+</center>
+<br>
+<center>
+    <!-- grants -->
+    <div class="container2">
+                {% if app.patenttype == 'full' %}
+        <button style ="color:rgb(255, 255, 255) " class="but2">Grant</button>
+         {% if GrantStatus.status %}
+        <p style="color:green;">Grant Completed</p>
+        {% else %}
+        <form action="{% url 'GrantStatus' %}" method="post">
+          {% csrf_token %}
+          <input name="uid" value="{{app.uid}}" hidden>
+         <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Grant Completed</button>
+      </form></div><hr>
+     <!--<form action="#">
+          
+          <h3 style ="color:rgb(38, 157, 212) "> Grant :<input type="radio" id="test1" name="radio-group" checked>
+          <label for="test1"> Granted</label>
+          
+          <input type="radio" id="test2" name="radio-group">
+          <label for="test2">Rejected</label> </h3>
+
+         <button  style ="color:rgb(255, 255, 255);background-color:green; " class="but2" type="submit">Submit</button>
+        
+      </form>-->
+        {% endif %}
+    {% endif %}
+
+    </div>
+</center>
+{% if app.status %}
+<form action="{% url 'openapplication' %}" method="post">
+    {% csrf_token %}
+    <input name="uid" value="{{app.uid}}" hidden>
+         <button  style ="float:right; color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Open Application</button>
+</form>
+{% else %}
+<form action="{% url 'closeapplication' %}" method="post">
+    {% csrf_token %}
+    <input name="uid" value="{{app.uid}}" hidden>
+         <button  style ="float:right; color:rgb(255, 255, 255); background-color:red;" class="but2" type="submit">Close Application</button>
+</form>
+{% endif %}
+</body>
+</html> 

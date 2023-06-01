@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novel Patent Services</title>
+  <style>
+    * {
+      font-size: 16px;
+    }
+
+    table {
+      width: 90%;
+      border: 1px solid #1694d8;
+
+      color: #1694d8;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      border: 1px solid #1694d8;
+    }
+
+    th {
+      border-bottom: 1px solid #1694d8;
+      text-align: left;
+    }
+  </style>
+
+
+</head>
+{% include 'navigation/topnavbar.html' %}
+
+<body>
+  <div class="btn-group" style="margin-top:2%;margin-left:5%">
+    <button type="button" style="padding:15px 32px;font-size: 16px;margin: 4px 2px;"
+      class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Application
+    </button>
+    <div class="dropdown-menu" style="text-align:center;">
+      <a class="dropdown-item drop" style="text-decoration:none;" href="{% url 'fullpatentapplication' %}">Full
+        Patent</a><br>
+      <a class="dropdown-item drop" href="{% url 'patentapplication' %}" style="text-decoration:none;">Patent</a><br>
+      <a class="dropdown-item drop" href="{% url 'copyrightapplication' %}"
+        style="text-decoration:none;">Copyright</a><br>
+      <a class="dropdown-item drop" href="{% url 'trademarkapplication'%}"
+        style="text-decoration:none;">Trademark</a><br>
+      <a class="dropdown-item drop" href="{% url 'designapplication'%}" style="text-decoration:none;">Design</a><br>
+    </div>
+  </div>
+
+  <div>
+    <table align="center" style="margin-top:2%;">
+      <tr style="border-bottom: 1px solid #1694d855;
+    text-align: left;">
+        <th>Date</th>
+        <th>Title.</th>
+        <th>Patent Type</th>
+        <th>Organization</th>
+        <th>status</th>
+        <th></th>
+      </tr>
+      {% for i in con %}
+      <tr style="border-bottom: 1px solid #1694d855;
+    text-align: left;">
+        <td>{{i.date}}</td>
+        <td>{{i.title}}</td>
+        <td>{{i.patenttype}}</td>
+        <td>{{i.organisation}}</td>
+        {% if i.status %}
+        <td style="color:green">completed</td>
+        {% else %}
+        <td style="color:red">pending</td>
+        {% endif %}
+        <td><a type="button btn-primary"
+            style="background-color: #1694d8;padding:10px;text-decoration:none ;color: white;border-color: #1694d8;"
+            href="{% url 'editapplication' uid=i.uid  %}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+        <td><a type="button btn-primary"
+            style="background-color: red;padding:10px;text-decoration:none ;color: white;border-color: #1694d8;"
+            href="{% url 'delete' uid=i.uid  %}"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
+      </tr>
+      {% endfor %}
+      {% for i in cp %}
+      <tr>
+        <td>{{i.date}}</td>
+        <td>{{i.titleofwork}}</td>
+        <td>Copyright</td>
+        <td>{{i.clientname}}</td>
+        {% if i.status %}
+        <td style="color:green">completed</td>
+        {% else %}
+        <td style="color:red">pending</td>
+        {% endif %}
+        <td><a type="button btn-primary"
+            style="background-color: #1694d8;padding:10px;text-decoration:none ;color: white;border-color: #1694d8;"
+            href="{% url 'editapplicationcopyright' uid=i.uid  %}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+        <td><a type="button btn-primary"
+            style="background-color: red;padding:10px;text-decoration:none ;color: white;border-color: #1694d8;"
+            href="{% url 'deletecopyright' uid=i.uid  %}"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
+        <td></td>
+      </tr>
+      {% endfor %}
+
+    </table>
+  </div>
+</body>
+
+</html>

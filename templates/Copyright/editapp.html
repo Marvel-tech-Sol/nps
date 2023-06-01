@@ -1,0 +1,85 @@
+{<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <title>Edit Application</title>
+    <link rel="shortcut icon" type="image" href="img/logo.png"/>
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="users.css">
+    <link rel="stylesheet" href="formtype2.css">
+    <link rel="stylesheet" href="rbox2.css">
+    <link href='https://fonts.googleapis.com/css?family=Solway' rel='stylesheet'>
+</head>
+<style>
+input[type=text], select ,input[type = date]{
+    width: 50%;
+    padding: 12px 15px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-color: #1694d8;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  .but2 {
+    background-color: #1694d8;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+</style>
+<body>
+{% include 'navigation/topnavbar.html' %}
+<br>
+<br>
+<center><h2 style="color:rgb(38, 157, 212);">Application No: {{c.uid }}</h2></center>
+<center>
+    <!------ Details------>
+    <div class="container">
+        <br>
+        <br>
+        <button style="color:rgb(255, 255, 255) " class="but2">Details</button>
+        <br>
+        <h2 style="color:rgb(38, 157, 212) ">Type:</h2>
+        <label for="fname"></label>
+        <input type="text" id="fname" value="copyright" disabled placeholder="Type"><br>
+        <h2 style="color:rgb(38, 157, 212) ">Title :</h2>
+        <label for="lname"></label>
+        <input type="text" id="lname" name="lname" placeholder=" Title" disabled value="{{c.titleofwork}}"><br>
+        <h2 style="color:rgb(38, 157, 212) "> Client Name :</h2>
+        <input type="text" id="fname" name="" value="{{c.clientname}}" disabled placeholder="Organization"><br>
+        <br>
+        <br>
+    </div>
+    <!-- end details -->
+</center>
+<hr>
+<br>
+<div class="container">
+    <br>
+    {% if c.status %}
+    <h2 style="color:green;text-align:center;">Copyright Completed</h2>
+    {% else %}
+    <form action="{% url 'CopyrightStatusup' %}" method="post">
+        {% csrf_token %}
+        <input name="uid" value="{{c.uid}}" hidden>
+        <button style="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Copyright
+            Completed
+        </button>
+    </form>
+    {% endif %}
+</div>
+<hr>
+
+
+</body>
+
+</html>

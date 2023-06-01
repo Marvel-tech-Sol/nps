@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  .button {
+    background-color: #1694d8;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .top li {
+    display: inline-block;
+    font-size: 20px;
+    padding: 20px;
+  }  
+  input[type=text],input[type=date], select {
+    width: 40%;
+    padding: 7px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-color: #1694d8;
+    border-radius: 2px;
+    box-sizing: border-box;
+  }
+</style>
+{% include 'navigation/topnavbar.html' %}
+<body>
+   <ul class="top">
+        <li><button class="button" >New Application</button></li>
+        <li style="color:#1694d8; margin-left:400px;font-weight: bolder;">FULL PATENT APPLICATION</li>
+    </ul><center><div>
+        <form action="fullpatentapplication" method="post">
+                        {% csrf_token %}
+
+<div style="width:100%;display:flex;flex-wrap:wrap;justify-items:space-between;margin-left:40px;overflow:hidden;">
+          <input type="date" id="fname" style="margin:10px;width:20%;" name="date" placeholder="Date">
+          <input type="text" id="fname" style="margin:10px;width:30%;" name="title" placeholder="Title"><br>
+          <input type="text" id="fname" style="margin:10px;width:20%;" name="organization" placeholder="Organization"><br>
+          <select id="mode of contact" style="margin:10px;width:20%;" name="modeofcontact">
+            <option value="mode of contact" hidden>mode of contact</option>
+            <option value="online">Online</option>
+            <option value="offline">Offline</option>
+          </select>
+          <select id="Refered By" style="margin:10px;width:20%;" name="referedby">
+            <option value="Refered By" hidden>Refered by</option>
+              {% for i in ref %}
+              <option value="{{i}}">{{i}}</option>
+              {% endfor %}
+
+          </select>
+          <input type="text" id="fname" style="margin:10px;width:20%;" name="contactnumber" placeholder="Contact Number"><br>
+          <input type="text" id="fname" style="margin:10px;width:30%;" name="emailid" placeholder="email id"><br>
+<select id="=assignto" style="margin:10px;width:20%;" name="assignto">
+            <option value="assign to" hidden>Assign To</option>
+              {% for i in user %}
+              <option value="{{i.username}}">{{i.name}} - {{i.teamname}}</option>
+              {% endfor %}
+</select>
+ <select id="ndastatus" name="ndastatus" style="margin:10px;width:20%;">
+            <option value="Status" hidden>NDAs status</option>
+            <option value="Signed NDA Sent">Signed NDA Sent</option>
+            <option value="Signed copy received (Both)">Signed copy received (Both)</option>
+            <option value="Existing client">Existing client</option>
+            <option value="MoU signed institute/entity)">MoU signed institute/entity</option>
+          </select>
+    <select id="idfstatus" name="idfstatus" style="margin:10px;width:20%;">
+            <option value="" hidden>IDF status</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            </select>
+    <select id="quastatus" name="quastatus" style="margin:10px;width:20%;">
+            <option value="" hidden>Quotation Status</option>
+            <option value="Sent Quotation">Sent Quotation</option>
+            <option value="agreed">Agreed Quotation</option>
+            <option value="PO Released">PO Released</option>
+            </select>
+</div>
+            <button class="button" style=" float:right;margin-right:20%;padding:8px 20px;" type="submit">Submit</button>
+</form>
+   </div>
+    </center>
+</body>
+</html>

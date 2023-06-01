@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="copyright.css">
+    <title>Document</title>
+    <style>
+   *
+    {
+    font-size:16px;
+    }
+    table {
+    width:75%;
+  border: 1px solid #1694d8;
+
+  color: #1694d8;
+    }
+    th, td {
+  padding: 15px;
+}
+th{
+    border-bottom: 1px solid #1694d8;
+    text-align: left;
+}
+
+    </style>
+
+</head>
+{% include 'navigation/topnavbar.html' %}
+<body>
+  <button style="margin-left: 10%;background-color: #1694d8;padding:10px;color: white;">Drawing </button>
+        <table style="margin-top:5%;margin-left:15%;align:center;">
+            <table align="center" style="margin-top:4%;">
+            <tr >
+                <th>Date</th>
+              <th>Title.</th>
+              <th>Patent Type</th>
+              <th>Organization</th>
+              <th>status</th>
+              <th></th>
+</tr>
+                {% for i in r %}
+                {% for j in s %}
+                {% if i.uid == j.uid %}
+            <tr>
+           <td>{{i.date}}</td>
+                <td>{{i.title}}</td>
+                <td>{{i.patenttype}}</td>
+                <td>{{i.organisation}}</td>
+                {% if j.status %}
+                <td style="color:green;font-size:18px;">completed</td>
+                {% else %}
+<td><a href="{% url 'drawingstatus/' uid=i.uid %}" style="background-color: #1694d8;padding:10px;text-decoration:none ;color: white;border-color: #1694d8;" class="btn">Edit</a></td></tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+          </table>
+</body>
+</html>

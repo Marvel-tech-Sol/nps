@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  .button {
+    background-color: #1694d8;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .top li {
+    display: inline-block;
+    font-size: 20px;
+    padding: 20px;
+  }  
+  input[type=text],input[type=date], select {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-color: #1694d8;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  ::placeholder{
+    color: black;
+  }
+</style>
+{% include 'navigation/topnavbar.html' %}
+<body>
+   <ul class="top">
+        <li><button class="button">New Application</button></li>
+        <li style="color:#1694d8; margin-left:40%;font-weight: bolder;;">DESIGN APPLICATION</li>
+    </ul><br>
+   <center> <div >
+      
+        <form action="designapplication">
+            <div style="width:70%;display:flex;flex-wrap:wrap;margin:20px;justify-items:space-between;margin-left:40px">
+          <select style="margin:10px;width:25%;" id="Category of work" name="categoryofwork">
+            <option value="Category of work" hidden>Category of work</option>
+            <option value="Lituratic">Lituratic</option>
+            <option value="Artistic">Artistic</option>
+            <option value="Audio">Audio</option>
+            <option value="Video">Video</option>
+            <option value="Software">Software</option>
+          </select>
+
+          <input style="margin:10px;width:25%;" type="date" id="fname" name="date" placeholder="Date">
+          <input style="margin:10px;width:25%;" type="text" id="fname" name="clientname" placeholder="Client Name"><br>
+          <input style="margin:10px;width:52%;" type="text" id="fname" name="titleofwork" placeholder="Title of work"><br>
+          <select style="margin:10px;width:25%;" id="mode of contact" name="modeofcontact">
+            <option value="mode of contact" hidden>mode of contact</option>
+            <option value="online">Online</option>
+            <option value="offline">Offline</option>
+          </select>
+          <select style="margin:10px;width:25%;" id="Refered By" name="referedby">
+            <option value="Refered By" hidden>Refered by</option>
+            < {% for i in ref %}
+              <option value="{{i}}">{{i}}</option>
+              {% endfor %}
+          </select>
+          <input style="margin:10px;width:25%;" type="text" id="fname" name="contactnumber" placeholder="Contact Number"><br>
+                <input style="margin:10px;width:25%;" type="text" id="fname" name="emailid" placeholder="Email Id"><br></div>
+            <button class="button" style="margin-right:15%" type="submit">Submit</button>
+        </form>
+      </div>
+    </center>
+      
+</body>
+</html>

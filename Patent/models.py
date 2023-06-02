@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # Create your models here.
 
 class Patentapplication(models.Model):
@@ -33,8 +32,8 @@ class PaymentStatus(models.Model):
 
 class NDAStatus(models.Model):
     status = models.BooleanField(default=False)
-    uid = models.CharField(max_length=20)
-    nda = models.CharField(max_length=20)
+    uid = models.CharField(max_length=50)
+    nda = models.CharField(max_length=50)
 
     def __str__(self):
         return self.uid
@@ -46,7 +45,7 @@ class NoveltyStatus(models.Model):
     duedate = models.DateField(null=True)
     rating = models.CharField(max_length=10)
     qc = models.CharField(max_length=10)
-    assignto = models.CharField(max_length=10)
+    assignto = models.CharField(max_length=50)
 
     def __str__(self):
         return self.uid
@@ -64,7 +63,7 @@ class DrawingStatus(models.Model):
     status = models.BooleanField(default=False)
     uid = models.CharField(max_length=20)
     rating = models.CharField(max_length=20)
-    assignto = models.CharField(max_length=20)
+    assignto = models.CharField(max_length=50)
     duedate = models.DateField(max_length=20,null=True)
     qc = models.BooleanField(default=False)
 
@@ -125,7 +124,7 @@ class GrantsStatus(models.Model):
 
 class Assignedto(models.Model):
     uid = models.CharField(max_length=20)
-    assignto = models.CharField(max_length=20)
+    assignto = models.CharField(max_length=50)
     assignstatus = models.BooleanField(default=False)
 
     def __str__(self):

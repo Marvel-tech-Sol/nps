@@ -96,6 +96,16 @@ DATABASES = {
     #     'PORT': '3306',
     # }
     'default':dj_database_url.parse("postgres://admin:FiiOyqZubl53UM54F7Bqmie7BAJ5n1Qh@dpg-chsdoc67avjdbih6vbq0-a.oregon-postgres.render.com/npsdb")
+    # 'default':dj_database_url.parse('postgresql://dharmatejaneralla00:YxDeFuBIJl92@ep-round-grass-737579.us-east-2.aws.neon.tech/neondb')
+    # 'default':dj_database_url.parse('postgres://dharmatejaneralla00:YxDeFuBIJl92@ep-round-grass-737579.us-east-2.aws.neon.tech/npsdb')
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': ' npsdb',
+    #     'USER': 'admin_npsdb',
+    #     'PASSWORD': 'Admin_npsdb',
+    #     'HOST': 'npsdb.cty3xwdeacfu.us-east-1.rds.amazonaws.com',
+    #     'PORT': '5432',
+    # }
 }
 
 # Password validation

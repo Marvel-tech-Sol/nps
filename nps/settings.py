@@ -88,7 +88,18 @@ WSGI_APPLICATION = 'nps.wsgi.application'
 
 DATABASES = {
 
-    'default':dj_database_url.parse("postgres://admin:FiiOyqZubl53UM54F7Bqmie7BAJ5n1Qh@dpg-chsdoc67avjdbih6vbq0-a.oregon-postgres.render.com/npsdb")
+    # 'default':dj_database_url.parse("postgres://admin:FiiOyqZubl53UM54F7Bqmie7BAJ5n1Qh@dpg-chsdoc67avjdbih6vbq0-a.oregon-postgres.render.com/npsdb")
+'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'npsdb',
+        'USER': 'admin',
+        'PASSWORD': '8yqXg186',
+        'HOST': 'mysql-129881-0.cloudclusters.net',
+        'PORT': '10010',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
+    }
 }
 
 # Password validation

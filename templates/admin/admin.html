@@ -82,11 +82,7 @@
         <td>{{i.title}}</td>
         <td>{{i.patenttype}}</td>
         <td>{{i.organisation}}</td>
-        {% if i.status %}
-        <td style="color:green">completed</td>
-        {% else %}
-        <td style="color:red">pending</td>
-        {% endif %}
+
         <td><a type="button btn-primary"
             style="background-color: #1694d8;padding:10px;text-decoration:none ;color: white;border-color: #1694d8;"
             href="{% url 'editapplication' uid=i.uid  %}"><i class="fa-solid fa-pen-to-square"></i></a></td>

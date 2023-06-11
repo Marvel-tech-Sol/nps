@@ -34,7 +34,9 @@ def loginuser(r):
                 elif team == 'drafting':
                     c = apps.get_model('Patent', 'Patentapplication')
                     ro = c.objects.all()
-                    return render(r, 'Patent/Draftingtable.html', {'r': ro})
+                    DraftingStatus = apps.get_model('Patent', 'DraftingStatus')
+                    print(DraftingStatus)
+                    return render(r, 'Patent/Draftingtable.html', {'r': ro,'d': DraftingStatus.objects.all()})
                 elif team == 'documentation':
                     c = apps.get_model('Patent', 'Patentapplication')
                     ro = c.objects.all()
@@ -42,7 +44,8 @@ def loginuser(r):
                 elif team == 'noveltysearch' or team == 'Patent Search':
                     c = apps.get_model('Patent', 'Patentapplication')
                     ro = c.objects.all()
-                    return render(r, 'Patent/Patentabilitysearchtable.html', {'r': ro})
+                    NoveltyStatus = apps.get_model('Patent', 'NoveltyStatus')
+                    return render(r, 'Patent/Patentabilitysearchtable.html', {'r': ro,'NoveltyStatus': NoveltyStatus.objects.all()})
                 elif team == 'trademark':
                     return redirect('trademark/table')
                 elif team == 'design':
@@ -68,9 +71,11 @@ def loginuser(r):
             ro = c.objects.all()
             return render(r, 'Patent/Drawingtable.html', {'r': ro, 's': d})
         elif team == 'drafting':
+            DraftingStatus = apps.get_model('Patent', 'DraftingStatus')
+            print(DraftingStatus)
             c = apps.get_model('Patent', 'Patentapplication')
             ro = c.objects.all()
-            return render(r, 'Patent/Draftingtable.html', {'r': ro})
+            return render(r, 'Patent/Draftingtable.html', {'r': ro,'d': DraftingStatus.objects.all()})
         elif team == 'documentation':
             c = apps.get_model('Patent', 'Patentapplication')
             ro = c.objects.all()

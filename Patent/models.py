@@ -54,7 +54,11 @@ class NoveltyStatus(models.Model):
 class DraftingStatus(models.Model):
     status = models.BooleanField(default=False)
     uid = models.CharField(max_length=20)
-
+    rating = models.CharField(max_length=20)
+    assignto = models.CharField(max_length=50)
+    duedate = models.DateField(max_length=20, null=True)
+    qc = models.CharField(max_length=10)
+    drawings = models.CharField(max_length=30)
     def __str__(self):
         return self.uid
 
@@ -66,6 +70,7 @@ class DrawingStatus(models.Model):
     assignto = models.CharField(max_length=50)
     duedate = models.DateField(max_length=20,null=True)
     qc = models.BooleanField(default=False)
+    drawings = models.CharField(max_length=30)
 
     def __str__(self):
         return self.uid

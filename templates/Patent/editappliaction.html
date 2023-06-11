@@ -146,8 +146,9 @@ input[type=text],input[type=date], select {
           style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Assign To</label>
 
     <p style="color:green;font-size:18px;margin-left:20px; ">{{NoveltyStatus.assignto}}</p>
+
     </div>
-    {% endif %}
+    {% else %}
     <form action="{% url 'NoveltyStatus' %}" method="post">
       <div style="width:100%;display:flex;flex-wrap:wrap;justify-items:space-between;margin-left:40px;overflow:hidden;">
         {% csrf_token %}
@@ -178,11 +179,9 @@ input[type=text],input[type=date], select {
 
       </div>
       <button class="but2" style=" float:right;margin-right:20%;padding:8px 20px;margin-top: 1%;"
-        type="submit">Novelty
-        Completed</button>
+        type="submit">Novelty Completed</button>
     </form></div><hr>
-
-
+    {% endif %}
     {% endif %}
 
     <!-- end novelty  -->
@@ -198,12 +197,67 @@ input[type=text],input[type=date], select {
      <button style ="color:rgb(255, 255, 255) " class="but2">Drafting</button>
      {% if DraftingStatus.status %}
         <p style="color:green;">Drafting Completed</p>
+        <div style="width:70%;display:flex;flex-wrap:wrap;justify-items:space-between;margin-left:40px;overflow:hidden;">
+      <label
+          style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Due Date</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{DraftingStatus.duedate}}</p>
+       <label
+          style='align-items: center;font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Rating</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{DraftingStatus.rating}}</p>
+       <label
+          style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Q.C.</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{DraftingStatus.qc}}</p>
+       <label
+          style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Assign To</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{DraftingStatus.assignto}}</p>
+            <label
+          style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Drawings</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{DraftingStatus.drawings}}</p>
+    </div>
         {% else %}
-        <form action="{% url 'DraftingStatus' %}" method="post">
-          {% csrf_token %}
-          <input name="uid" value="{{app.uid}}" hidden>
-         <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Drafting Completed</button>
-      </form></div><hr>
+       <form action="{% url 'DraftingStatus' %}" method="post">
+      <div style="width:90%;display:flex;flex-wrap:wrap;justify-items:space-between;margin-left:40px;overflow:hidden;">
+
+        {% csrf_token %}
+        <input name="uid" value="{{c.uid}}" hidden>
+        <label style='align-items: center;margin-top: 1%; font-size: 16px;color: #0d9bd3;font-weight: bold;'>Assign
+          To</label><input type="text" id="fname" style="margin:10px;width:10%;" name="assignto"
+          placeholder="Assign to" >
+        <label style='align-items: center;margin-top: 1%; font-size: 16px;color: #0d9bd3;font-weight: bold;'>Due
+          Date:</label> <input type="date" id="fname" style="margin:10px;width: 10%;" name="duedate"
+          placeholder="Due Date" value="">
+        <label
+          style='align-items: center;margin-top: 1%; font-size: 16px;color: #0d9bd3;font-weight: bold;'>Rating</label>
+        <select id="idfstatus" name="rating" style="margin:10px;width:15%;">
+          <option value="" hidden>Rating</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+        <label style='align-items: center;margin-top: 1%; font-size: 16px;color: #0d9bd3;font-weight: bold;'>Quality
+          Check</label>
+        <select id="idfstatus" name="qc" style="margin:10px;width:15%;">
+          <option value="" hidden>QC Status</option>
+          <option value="completed">Completed</option>
+          <option value="In Progress">In Progress</option>
+          <option value="not Started">Not Started</option>
+        </select>
+    <label style='align-items: center;margin-top: 1%; font-size: 16px;color: #0d9bd3;font-weight: bold;'>Drawings</label>
+        <select id="idfstatus" name="drawings" style="margin:10px;width:15%;">
+          <option value="completed">Completed</option>
+          <option value="In Progress">In Progress</option>
+          <option value="not Started">Not Started</option>
+        </select>
+
+      </div>
+      <button class="button" style=" float:right;margin-right:20%;padding:8px 20px;margin-top: 1%;"
+        type="submit">Drafting Completed</button>
+    </form></div><hr>
     <!--<br>
          <h3 style="color:green;">Drafting completed</h3>
 

@@ -106,7 +106,8 @@ def Documentationtableview(r):
 
 def Draftingstatusview(r, uid):
     draftingstatus = Patentapplication.objects.get(uid=uid)
-    return render(r, "Patent/Draftingstatus.html", {'c': draftingstatus})
+    draftstatus =DraftingStatus.objects.get(uid=uid)
+    return render(r, "Patent/Draftingstatus.html", {'c': draftingstatus,'draftstatus':draftstatus})
 
 
 def Draftingtableview(r):
@@ -154,9 +155,14 @@ def Documentationstatusdata(r):
 def Draftingstatusdata(r):
     if r.method == 'POST':
         uid = r.POST['uid']
-        r = DraftingStatus.objects.get(uid=uid)
-        r.status = True
-        r.save()
+        dr = DraftingStatus.objects.get(uid=uid)
+        dr.status = True
+        dr.duedate = r.POST['duedate']
+        dr.assignto = r.POST['assignto']
+        dr.rating=r.POST['rating']
+        dr.qc = r.POST['qc']
+        dr.drawings = r.POST['drawings']
+        dr.save()
     return redirect('user/login')
 
 
@@ -211,7 +217,6 @@ def Patentabilitysearchstatusdata(r):
         n.assignto = assignto
         n.save()
         return redirect('user/login')
-
     return redirect('user/login')
 
 

@@ -242,3 +242,27 @@ def paymentStatus(r):
         p.amount = amount
         p.save()
     return redirect('user/login')
+
+def approvenovelty(r,uid):
+    n = NoveltyStatus.objects.get(uid=uid)
+    n.approved = True
+    n.save()
+    return redirect('user/login')
+
+def reassignnovelty(r,uid):
+    n = NoveltyStatus.objects.get(uid=uid)
+    n.status = False
+    n.save()
+    return redirect('user/login')
+
+def approvedraft(r,uid):
+    dr = DraftingStatus.objects.get(uid=uid)
+    dr.approved = True
+    dr.save()
+    return redirect('user/login')
+
+def reassigndraft(r,uid):
+    dr = DraftingStatus.objects.get(uid=uid)
+    dr.status = False
+    dr.save()
+    return redirect('user/login')

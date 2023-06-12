@@ -22,4 +22,12 @@ urlpatterns=[
     path('GrantStatus',views.GrantsStatusdata,name='GrantStatus'),
     path('PaymentStatus',views.PaymentStatus,name='PaymentStatus'),
 
+    #approve
+    path('approvenovelty/<str:uid>',views.approvenovelty,name = 'approvenovelty/'),
+    path('approvedrafting/<str:uid>',views.approvedraft,name = 'approvedraft/'),
+
+
+    #reassign
+    path('reassignnovelty/<str:uid>',views.reassignnovelty,name='reassignnovelty/'),
+    path('reassigdrafting/<str:uid>',views.reassigndraft,name='reassigndraft/'),
 ]

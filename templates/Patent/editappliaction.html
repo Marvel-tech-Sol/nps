@@ -86,19 +86,6 @@ input[type=text],input[type=date], select {
      <p style="">NDA</p>
         {% if  ndastatus.status %}
         <p style="color:green;">{{ndastatus.nda}}</p>
-<!--        <form action="{% url 'ndastatus' %}" method="post">-->
-<!--              {% csrf_token %}-->
-<!--            <input name="uid" value="{{app.uid}}" hidden>-->
-<!--            <select id="ndastatus" name="status">-->
-<!--            <option value="Status" hidden>NDAs status</option>-->
-<!--            <option value="Signed NDA Sent">Signed NDA Sent</option>-->
-<!--            <option value="Signed copy received (Both)">Signed copy received (Both)</option>-->
-<!--            <option value="Existing client">Existing client</option>-->
-<!--            <option value="MoU signed institute/entity)">MoU signed institute/entity</option>-->
-<!--          </select>-->
-
-<!--            <button style ="color:rgb(255, 255, 255) " class="but2" type="submit">Submit</button>-->
-<!--          </form>-->
         {% else %}
         <form action="{% url 'ndastatus' %}" method="post">
               {% csrf_token %}
@@ -129,7 +116,7 @@ input[type=text],input[type=date], select {
      <button style ="color:rgb(255, 255, 255) " class="but2">Patentablity Search</button>
          {% if NoveltyStatus.status %}
     <p style="color:green;font-size:18px;margin-left:20px; ">Novelty Completed</p>
-    <div style="width:50%;display:flex;flex-wrap:wrap;justify-items:space-between;margin-left:40px;overflow:hidden;">
+    <div style="width:70%;display:flex;flex-wrap:wrap;justify-items:space-between;margin-left:40px;overflow:hidden;">
       <label
           style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Due Date</label>
 
@@ -146,7 +133,16 @@ input[type=text],input[type=date], select {
           style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Assign To</label>
 
     <p style="color:green;font-size:18px;margin-left:20px; ">{{NoveltyStatus.assignto}}</p>
-
+        {% if NoveltyStatus.approved %}
+        <p style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn"> Approved</p>
+        {% else %}
+        <p>
+        <a href="{% url 'approvenovelty/' app.uid %}" style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Approve</a>
+        </p>
+         <p>
+        <a href="{% url 'reassignnovelty/' app.uid %}" style="background-color: red;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Reassign</a>
+        </p>
+        {% endif %}
     </div>
     {% else %}
     <form action="{% url 'NoveltyStatus' %}" method="post">
@@ -175,8 +171,6 @@ input[type=text],input[type=date], select {
           <option value="In Progress">In Progress</option>
           <option value="not Started">Not Started</option>
         </select>
-
-
       </div>
       <button class="but2" style=" float:right;margin-right:20%;padding:8px 20px;margin-top: 1%;"
         type="submit">Novelty Completed</button>
@@ -218,6 +212,16 @@ input[type=text],input[type=date], select {
           style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Drawings</label>
 
     <p style="color:green;font-size:18px;margin-left:20px; ">{{DraftingStatus.drawings}}</p>
+            {% if DraftingStatus.approved %}
+        <p style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn"> Approved</p>
+        {% else %}
+        <p>
+        <a href="{% url 'approvedrafting/' app.uid %}" style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Approve</a>
+        </p>
+         <p>
+        <a href="{% url 'reassigdrafting/' app.uid %}" style="background-color: red;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Reassign</a>
+        </p>
+        {% endif %}
     </div>
         {% else %}
        <form action="{% url 'DraftingStatus' %}" method="post">
@@ -258,11 +262,6 @@ input[type=text],input[type=date], select {
       <button class="button" style=" float:right;margin-right:20%;padding:8px 20px;margin-top: 1%;"
         type="submit">Drafting Completed</button>
     </form></div><hr>
-    <!--<br>
-         <h3 style="color:green;">Drafting completed</h3>
-
-        <h3 style="color:red;">Drafting not Completed</h3>
-    </div><hr>-->
     {% endif %}
         {% endif %}
 <!-- end drafting -->
@@ -284,10 +283,7 @@ input[type=text],input[type=date], select {
           <input name="uid" value="{{app.uid}}" hidden>
          <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Drawing Completed</button>
       </form></div><hr>
-    <!--<br>
-        <h3 style="color:green;">Drawing completed</h3>
 
-        <h3 style="color:red;">Drawing not Completed</h3><hr>-->
        {% endif %}
     {% endif %}
     </div>
@@ -310,10 +306,7 @@ input[type=text],input[type=date], select {
           <input name="uid" value="{{app.uid}}" hidden>
          <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Documentation Completed</button>
       </form></div><hr>
-    <!--<br ><h3 style="color:green;">Documentation completed</h3>
 
-        <h3 style="color:red;">Documentation not Completed</h3>
-          <hr>-->
         {% endif %}
         {% endif %}
 
@@ -357,14 +350,7 @@ input[type=text],input[type=date], select {
           <input name="uid" value="{{app.uid}}" hidden>
          <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Examination Completed</button>
       </form></div><hr>
-        <!-- <form>
-            <p style ="color:rgb(38, 157, 212) ">
-            <label for="fname"></label>
-            <input type="date" id="fname" name="" placeholder="Examination Date"><br> </p>
-            <p style ="color:rgb(38, 157, 212) ">
-            </p>
-            <button  style ="color:rgb(255, 255, 255);background-color:green; " class="but2">Submit</button>
-         </form></div><hr>-->
+
     {% endif %}
     {% endif %}
 </center>
@@ -385,16 +371,7 @@ input[type=text],input[type=date], select {
           <input name="uid" value="{{app.uid}}" hidden>
          <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Fer Completed</button>
       </form></div><hr>
-    <!-- <form>
-        <p style ="color:rgb(38, 157, 212) ">
-        <label for="fname"></label>
-        <input type="date" id="fname" name="" placeholder="FER Date"><br> </p>
-        <p style ="color:rgb(38, 157, 212) ">
-        </p>
-        </form>
-       <br>
-        <button  style ="color:rgb(255, 255, 255);background-color:green; " class="but2">Submit</button>
-    </div><hr>-->
+
     {% endif %}
     {% endif %}
 </center>

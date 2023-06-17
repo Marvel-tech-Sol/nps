@@ -24,10 +24,10 @@ urlpatterns=[
 
     #approve
     path('approvenovelty/<str:uid>',views.approvenovelty,name = 'approvenovelty/'),
-    path('approvedrafting/<str:uid>',views.approvedraft,name = 'approvedraft/'),
+    path('approvedrafting/<str:uid>',views.approvedraft,name = 'approvedrafting/'),
 
 
     #reassign
     path('reassignnovelty/<str:uid>',views.reassignnovelty,name='reassignnovelty/'),
-    path('reassigdrafting/<str:uid>',views.reassigndraft,name='reassigndraft/'),
+    path('reassigdrafting/<str:uid>',views.reassigndraft,name='reassigdrafting/'),
 ]

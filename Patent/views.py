@@ -196,10 +196,20 @@ def ExaminationSatusdata(r):
 def FerStatusdata(r):
     if r.method == 'POST':
         uid = r.POST['uid']
-        r = FerStatus.objects.get(uid=uid)
-        r.status = True
-        r.save()
+        fer = FerStatus.objects.get(uid=uid)
+        fer.status = True
+        fer.duedate = r.POST['duedate']
+        fer.assignto = r.POST['assignto']
+        fer.rating = r.POST['rating']
+        fer.qc = r.POST['qc']
+        fer.save()
     return redirect('user/login')
+
+
+def FerstatusView(r,uid):
+    Fer = FerStatus.objects.get(uid=uid)
+    patent = Patentapplication.objects.get(uid=uid)
+    return render(r,'Patent/Ferstatus.html',{'Fer':Fer,'c':patent})
 
 
 def Patentabilitysearchstatusdata(r):
@@ -263,6 +273,18 @@ def approvedraft(r,uid):
 
 def reassigndraft(r,uid):
     dr = DraftingStatus.objects.get(uid=uid)
+    dr.status = False
+    dr.save()
+    return redirect('user/login')
+
+def approvefer(r,uid):
+    dr = FerStatus.objects.get(uid=uid)
+    dr.approved = True
+    dr.save()
+    return redirect('user/login')
+
+def reassignfer(r,uid):
+    dr = FerStatus.objects.get(uid=uid)
     dr.status = False
     dr.save()
     return redirect('user/login')

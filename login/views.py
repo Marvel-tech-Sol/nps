@@ -5,6 +5,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.template.defaulttags import url
 
+from Patent.models import FerStatus
 from . import models
 
 
@@ -52,6 +53,7 @@ def loginuser(r):
                     return redirect('design/table')
                 elif team == 'copyright':
                     c = apps.get_model()
+                    return redirect('copyright/table')
                 elif team == 'mainadmin':
                     return redirect('adminpanel/')
             else:
@@ -94,6 +96,13 @@ def loginuser(r):
             return redirect('copyright/table')
         elif team == 'mainadmin':
             return redirect('adminpanel/')
+        elif team == 'FER':
+            fer = FerStatus.objects.all()
+            c = apps.get_model('Patent', 'Patentapplication').objects.all()
+            return render(r,'Patent/FER.html',{'c':c,'fer':fer})
+            pass
+        elif team == 'ideadevelopment':
+            pass
     return render(r, 'user/login.html')
 
 

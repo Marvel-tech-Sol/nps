@@ -65,7 +65,7 @@ input[type=text],input[type=date], select {
     {% if assign.assignstatus %}
         <form action="{% url 'assignto' %}" method="post">
             {% csrf_token %}
-    <p style="margin:10px;width:20%;">Assigned to:<span style="color:rgb(38, 157, 212);font-size:20px; ">{{assign.assignto}}</span></p>
+    <p style="margin:10px;width:20%;">Assigned to:  <span style="color:rgb(38, 157, 212);font-size:20px; ">{{assign.assignto}}</span></p>
             <input type="text" value="{{app.uid}}" name="uid" hidden>
     <select id="=assignto" name="assignto" style="margin:10px;width:20%;">
             <option value="assign to" hidden>Assign To</option>
@@ -100,11 +100,13 @@ input[type=text],input[type=date], select {
 
             <button style ="color:rgb(255, 255, 255) " class="but2" type="submit">Submit</button>
           </form>
-        {% endif %}
-    </div>
+           </div>
 </center>
 <hr>
 <br>
+        {% endif %}
+<hr>
+
 <!-- end NDA -->
 <!-- novelty  -->
 <center>
@@ -176,11 +178,12 @@ input[type=text],input[type=date], select {
         type="submit">Novelty Completed</button>
     </form></div><hr>
     {% endif %}
+    </center>
+<br>
+
     {% endif %}
 
     <!-- end novelty  -->
-</center>
-<br>
 
 <center>
     <!-- drafting  -->
@@ -259,15 +262,15 @@ input[type=text],input[type=date], select {
         </select>
 
       </div>
-<!--      <button class="button" style=" float:right;margin-right:20%;padding:8px 20px;margin-top: 1%;"-->
-<!--        type="submit">Drafting Completed</button>-->
-<!--    </form></div><hr>-->
-    {% endif %}
+      <button class="button" style=" float:right;margin-right:20%;padding:8px 20px;margin-top: 1%;"
+        type="submit">Drafting Completed</button>
+    </form></div><hr>
+    {% endif %}<br>
         {% endif %}
 <!-- end drafting -->
 </center>
 
-<br>
+
 <center>
     <!-- drawing -->
     {% if app.patenttype == 'full' or app.patenttype == 'drawing' %}
@@ -307,13 +310,13 @@ input[type=text],input[type=date], select {
          <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Documentation Completed</button>
       </form></div><hr>
 
-        {% endif %}
+        {% endif %}<br>
         {% endif %}
 
     </div>
     <!-- end documentation -->
 </center>
-<br>
+
 
 <center>
     <!-- filing -->
@@ -331,9 +334,9 @@ input[type=text],input[type=date], select {
          <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Filed</button>
       </form></div><hr>
     {% endif %}
+    <br>
     {% endif %}
 </center>
-<br>
 
 <center>
     <!-- examination  -->
@@ -350,11 +353,11 @@ input[type=text],input[type=date], select {
           <input name="uid" value="{{app.uid}}" hidden>
          <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Examination Completed</button>
       </form></div><hr>
-
+<br>
     {% endif %}
     {% endif %}
 </center>
-<br>
+
 
 <center>
     <!-- FER  -->
@@ -363,20 +366,80 @@ input[type=text],input[type=date], select {
         <br>
         <br>
      <button style ="color:rgb(255, 255, 255) " class="but2">FER</button>
-    {% if FerStatus.status %}
-        <p style="color:green;">Fer Completed</p>
+      {% if FerStatus.status %}
+        <p style="color:green;">FER Completed</p>
+        <div style="width:70%;display:flex;flex-wrap:wrap;justify-items:space-between;margin-left:40px;overflow:hidden;">
+      <label
+          style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Due Date</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{FerStatus.duedate}}</p>
+       <label
+          style='align-items: center;font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Rating</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{FerStatus.rating}}</p>
+       <label
+          style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Q.C.</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{FerStatus.qc}}</p>
+       <label
+          style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Assign To</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{FerStatus.assignto}}</p>
+            {% if FerStatus.approved %}
+        <p style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn"> Approved</p>
         {% else %}
-        <form action="{% url 'FerStatus' %}" method="post">
-          {% csrf_token %}
-          <input name="uid" value="{{app.uid}}" hidden>
-         <button  style ="color:rgb(255, 255, 255); background-color:green;" class="but2" type="submit">Fer Completed</button>
-      </form></div><hr>
+        <p>
+        <a href="{% url 'approvefer/' app.uid %}" style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Approve</a>
+        </p>
+         <p>
+        <a href="{% url 'reassigfer/' app.uid %}" style="background-color: red;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Reassign</a>
+        </p>
+        {% endif %}
+    </div>
+        {% else %}
+       <form action="{% url 'FerStatus' %}" method="post">
+      <div style="width:90%;display:flex;flex-wrap:wrap;justify-items:space-between;margin-left:40px;overflow:hidden;">
 
+        {% csrf_token %}
+        <input name="uid" value="{{c.uid}}" hidden>
+        <label style='align-items: center;margin-top: 1%; font-size: 16px;color: #0d9bd3;font-weight: bold;'>Assign
+          To</label><input type="text" id="fname" style="margin:10px;width:10%;" name="assignto"
+          placeholder="Assign to" >
+        <label style='align-items: center;margin-top: 1%; font-size: 16px;color: #0d9bd3;font-weight: bold;'>Due
+          Date:</label> <input type="date" id="fname" style="margin:10px;width: 10%;" name="duedate"
+          placeholder="Due Date" value="">
+        <label
+          style='align-items: center;margin-top: 1%; font-size: 16px;color: #0d9bd3;font-weight: bold;'>Rating</label>
+        <select id="idfstatus" name="rating" style="margin:10px;width:15%;">
+          <option value="" hidden>Rating</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+        <label style='align-items: center;margin-top: 1%; font-size: 16px;color: #0d9bd3;font-weight: bold;'>Quality
+          Check</label>
+        <select id="idfstatus" name="qc" style="margin:10px;width:15%;">
+          <option value="" hidden>QC Status</option>
+          <option value="completed">Completed</option>
+          <option value="In Progress">In Progress</option>
+          <option value="not Started">Not Started</option>
+        </select>
+    <label style='align-items: center;margin-top: 1%; font-size: 16px;color: #0d9bd3;font-weight: bold;'>Drawings</label>
+        <select id="idfstatus" name="drawings" style="margin:10px;width:15%;">
+          <option value="completed">Completed</option>
+          <option value="In Progress">In Progress</option>
+          <option value="not Started">Not Started</option>
+        </select>
+
+      </div>
+      <button class="button" style=" float:right;margin-right:20%;padding:8px 20px;margin-top: 1%;"
+        type="submit">Drafting Completed</button>
+    </form></div><hr><br>
     {% endif %}
-    {% endif %}
+        {% endif %}
 </center>
-<br>
 
+<hr>
 <center>
     <!-- hearing  -->
     {% if app.patenttype == 'full' or app.patenttype == 'hearing' %}

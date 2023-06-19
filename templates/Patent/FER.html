@@ -5,49 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="copyright.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Novel Patent Services</title>
   <link rel = "icon" href ="https://usercontent.one/wp/www.novelpatent.com/wp-content/uploads/2022/03/NPS-New-Logo.webp?media=1675758298"
         type = "image/x-icon">
-  <style>
-    *
-    {
-    font-size:14px;
+
+      <style>
+    * {
+      font-size: 16px;
     }
+
     table {
-    width:75%;
-  border: 1px solid #1694d8;
+      width: 80%;
+      border: 1px solid #1694d8;
 
-  color: #1694d8;
+      color: #1694d8;
     }
-    th, td {
-  padding: 15px;
-}
-th{
-    border-bottom: 1px solid #1694d8;
-    text-align: left;
-}
 
-</style>
+    th,
+    td {
+      padding: 8px;
+      border: 1px solid #1694d8;
+    }
 
-</head>
+    th {
+      border-bottom: 1px solid #1694d8;
+      text-align: left;
+    }
+  </style>
 
 {% include 'navigation/topnavbar.html' %}
+</head>
 <body>
-  <button style="margin-left: 10%;background-color: #1694d8;padding:10px;color: white;">NOVELTY SEARCH</button>
-        <table align="center" style="margin-top:4%;">
-            <tr >
-                <th>Date</th>
-              <th>Title.</th>
-              <th>Organization</th>
-              <th>Status</th>
-                <th>Approval Status</th>
-              <th></th>
-            </tr>
-            {% for i in r %}
-            {% for j in NoveltyStatus %}
+  <button style="margin-left: 10%;margin-top:40px;;background-color: #1694d8;padding:10px;color: white;">FER</button>
+        <table style="margin-top:5%;margin-left:10%;align:center;">
+           <tr style="border-bottom: 1px solid #1694d855;
+    text-align: left;">
+            <th>Date</th>
+              <th>Title</th>
+               <th>Organisation</th>
+               <th>status</th>
+               <th>Approval Status</th>
+               <th></th>
+             </tr>
+             {% for i in c %}
+            {% for j in fer %}
             {% if i.uid == j.uid %}
             <tr>
                 <td>{{i.date}}</td>
@@ -60,14 +66,15 @@ th{
                 {% endif %}
                  {% if j.approved %}
                 <td style="color:green;">Approved</td>
+
                 {% endif %}
-                <td><a href="{% url 'patentabilitysearchstatus/' i.uid %}" style="background-color: #1694d8;padding:10px;text-decoration:none ;color: white;border-color: #1694d8;"  class="btn"><i class="fa-solid fa-pen-to-square"></i></a></td></tr>
+                <td><a type="button btn-primary"
+            style="background-color: #1694d8;padding:10px;text-decoration:none ;color: white;border-color: #1694d8;"
+            href="{% url 'ferstatusview/' i.uid  %}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+      </tr>
             {% endif %}
             {% endfor %}
             {% endfor %}
-
-
-        
 
           </table>
 </body>

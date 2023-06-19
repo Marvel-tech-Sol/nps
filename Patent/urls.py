@@ -18,6 +18,7 @@ urlpatterns=[
     path('FilingStatus',views.FilingStatusdata,name=" FilingStatus"),
     path('ExaminationStatus',views.ExaminationSatusdata,name='ExaminationStatus'),
     path('FerStatus',views.FerStatusdata,name='FerStatus'),
+    path('ferstatusview/<str:uid>',views.FerstatusView,name='ferstatusview/'),
     path('HearingStatus',views.Hearingstatusdata,name='HearingStatus'),
     path('GrantStatus',views.GrantsStatusdata,name='GrantStatus'),
     path('PaymentStatus',views.PaymentStatus,name='PaymentStatus'),
@@ -25,9 +26,11 @@ urlpatterns=[
     #approve
     path('approvenovelty/<str:uid>',views.approvenovelty,name = 'approvenovelty/'),
     path('approvedrafting/<str:uid>',views.approvedraft,name = 'approvedrafting/'),
+    path('approvefer/<str:uid>',views.approvefer,name = 'approvefer/'),
 
 
     #reassign
     path('reassignnovelty/<str:uid>',views.reassignnovelty,name='reassignnovelty/'),
     path('reassigdrafting/<str:uid>',views.reassigndraft,name='reassigdrafting/'),
+    path('reassigfer/<str:uid>',views.reassignfer,name='reassigfer/'),
 ]

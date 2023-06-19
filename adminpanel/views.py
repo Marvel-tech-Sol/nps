@@ -191,3 +191,4 @@ def deleteApp(r, uid):
     patent = apps.get_model('Patent', 'Patentapplication').objects.get(uid=uid)
     patent.delete()
     return redirect('user/login')
+

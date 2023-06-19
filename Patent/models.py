@@ -43,8 +43,8 @@ class NoveltyStatus(models.Model):
     status = models.BooleanField(default=False)
     uid = models.CharField(max_length=20)
     duedate = models.DateField(null=True)
-    rating = models.CharField(max_length=10)
-    qc = models.CharField(max_length=10)
+    rating = models.CharField(max_length=20)
+    qc = models.CharField(max_length=20)
     assignto = models.CharField(max_length=50)
     approved = models.BooleanField(default=False)
     def __str__(self):
@@ -57,7 +57,7 @@ class DraftingStatus(models.Model):
     rating = models.CharField(max_length=20)
     assignto = models.CharField(max_length=50)
     duedate = models.DateField(max_length=20, null=True)
-    qc = models.CharField(max_length=10)
+    qc = models.CharField(max_length=20)
     drawings = models.CharField(max_length=30)
     approved = models.BooleanField(default=False)
     def __str__(self):
@@ -70,7 +70,7 @@ class DrawingStatus(models.Model):
     rating = models.CharField(max_length=20)
     assignto = models.CharField(max_length=50)
     duedate = models.DateField(max_length=20,null=True)
-    qc = models.BooleanField(default=False)
+    qc = models.CharField(max_length=20)
     drawings = models.CharField(max_length=30)
     approved = models.BooleanField(default=False)
 
@@ -106,7 +106,11 @@ class ExaminationSatus(models.Model):
 class FerStatus(models.Model):
     status = models.BooleanField(default=False)
     uid = models.CharField(max_length=20)
-    date = models.DateField(null=True)
+    rating = models.CharField(max_length=20)
+    assignto = models.CharField(max_length=50)
+    duedate = models.DateField(max_length=20, null=True)
+    qc = models.CharField(max_length=20)
+    approved = models.BooleanField(default=False)
 
     def __str__(self):
         return self.uid

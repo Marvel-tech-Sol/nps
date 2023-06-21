@@ -53,7 +53,7 @@ def Patentapplicationview(request):
     referedby = apps.get_model('login', 'referdby')
     if request.method == 'POST':
         title = request.POST['title']
-        type = request.POST['check[]']
+        type = request.POST.getlist('check[]')
         organization = request.POST['organization']
         referedby = request.POST['referedby']
         contactnumber = request.POST['contactnumber']
@@ -70,21 +70,21 @@ def Patentapplicationview(request):
                               patenttype=type, nda=nda, idf=idf, qua=quotation)
         r.save()
         NDAStatus(uid=uid, status=True, nda=nda).save()
-        if type == 'novelty search':
+        if  'novelty search' in type:
             NoveltyStatus(uid=uid, status=False).save()
-        if type == 'drafting':
+        if  'drafting' in type:
             DraftingStatus(uid=uid, status=False).save()
-        if type == 'drawing':
+        if 'drawing' in type:
             DrawingStatus(uid=uid, status=False).save()
-        if type == 'documentation':
+        if 'documentation' in type:
             DocumentationStatus(uid=uid, status=False).save()
-        if type == 'filing':
+        if 'filing' in type:
             FilingStatus(uid=uid, status=False).save()
-        if type == 'examination':
+        if 'examination' in type:
             ExaminationSatus(uid=uid, status=False).save()
-        if type == 'FER':
+        if 'FER' in type:
             FerStatus(uid=uid, status=False).save()
-        if type == 'hearing':
+        if 'hearing' in type:
             HearingStatus(uid=uid, status=False).save()
         GrantsStatus(uid=uid, status=False).save()
         PaymentStatus(uid=uid, status=False).save()
@@ -116,7 +116,8 @@ def Draftingtableview(r):
 
 def Drawingstatusview(r, uid):
     drawingstatus = Patentapplication.objects.get(uid=uid)
-    return render(r, "Patent/Drawingstatus.html", {'c': drawingstatus})
+    drawing = DrawingStatus.objects.get(uid=uid)
+    return render(r, "Patent/Drawingstatus.html", {'c': drawingstatus,'drawing':drawing})
 
 
 def Drawingtableview(r):
@@ -137,9 +138,14 @@ def Patentabilitysearchtableview(r):
 def Drawingstatusdata(r):
     if r.method == 'POST':
         uid = r.POST['uid']
-        r = DrawingStatus.objects.get(uid=uid)
-        r.status = True
-        r.save()
+        dr = DrawingStatus.objects.get(uid=uid)
+        dr.status = True
+        dr.duedate = r.POST['duedate']
+        dr.assignto = r.POST['assignto']
+        dr.rating = r.POST['rating']
+        dr.qc = r.POST['qc']
+        dr.drawings = r.POST['drawings']
+        dr.save()
         return redirect('user/login')
 
 
@@ -285,6 +291,17 @@ def approvefer(r,uid):
 
 def reassignfer(r,uid):
     dr = FerStatus.objects.get(uid=uid)
+    dr.status = False
+    dr.save()
+    return redirect('user/login')
+def approvedrawing(r,uid):
+    dr = DrawingStatus.objects.get(uid=uid)
+    dr.approved = True
+    dr.save()
+    return redirect('user/login')
+
+def reassigndrawing(r,uid):
+    dr = DraftingStatus.objects.get(uid=uid)
     dr.status = False
     dr.save()
     return redirect('user/login')

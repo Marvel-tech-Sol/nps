@@ -51,21 +51,21 @@ def Editapplication(r, uid):
              'DrawingStatus': DrawingStatus.objects.get(uid=uid),
              'HearingStatus': HearingStatus.objects.get(uid=uid),
              'ExaminationStatus': ExaminationSatus.objects.get(uid=uid)}
-    elif patent.patenttype == 'novelty search':
+    elif 'novelty search' in patent.patenttype:
         c = {'NoveltyStatus': NoveltyStatus.objects.get(uid=uid)}
-    elif patent.patenttype == 'drafting':
+    elif 'drafting' in patent.patenttype:
         c = {'DraftingStatus': DraftingStatus.objects.get(uid=uid)}
-    elif patent.patenttype == 'drawing':
+    elif 'drawing' in  patent.patenttype :
         c = {'DrawingStatus': DrawingStatus.objects.get(uid=uid)}
-    elif patent.patenttype == 'documentation':
+    elif 'documentation' in patent.patenttype:
         c = {'DocumentationStatus': DocumentationStatus.objects.get(uid=uid)}
-    elif patent.patenttype == 'filing':
+    elif 'filing' in patent.patenttype :
         c = {'FilingStatus': FilingStatus.objects.get(uid=uid)}
-    elif patent.patenttype == 'examination':
+    elif 'examination' in patent.patenttype:
         c = {'ExaminationSatus': ExaminationSatus.objects.get(uid=uid)}
-    elif patent.patenttype == 'FER':
+    elif 'FER' in patent.patenttype :
         c = {'FerStatus': FerStatus.objects.get(uid=uid), }
-    elif patent.patenttype == 'hearing':
+    elif 'hearing' in patent.patenttype:
         c = {'HearingStatus': HearingStatus.objects.get(uid=uid)}
     co = {**context, **c}
     return render(r, 'Patent/editappliaction.html', co)
@@ -189,6 +189,35 @@ def generateworkbook(r):
 
 def deleteApp(r, uid):
     patent = apps.get_model('Patent', 'Patentapplication').objects.get(uid=uid)
+    apps.get_model('Patent', 'GrantsStatus').objects.get(uid=uid).delete()
+    apps.get_model('Patent', 'PaymentStatus').objects.get(uid=uid).delete()
+    apps.get_model('Patent', 'Assignedto').objects.get(uid=uid).delete()
+    apps.get_model('Patent', 'NDAStatus').objects.get(uid=uid).delete()
+    if patent.patenttype == 'full':
+        apps.get_model('Patent','NoveltyStatus').objects.get(uid=uid).delete()
+        apps.get_model('Patent', 'DraftingStatus').objects.get(uid=uid).delete()
+        apps.get_model('Patent', 'DrawingStatus').objects.get(uid=uid).delete()
+        apps.get_model('Patent', 'DocumentationStatus').objects.get(uid=uid).delete()
+        apps.get_model('Patent', 'FilingStatus').objects.get(uid=uid).delete()
+        apps.get_model('Patent', 'ExaminationSatus').objects.get(uid=uid).delete()
+        apps.get_model('Patent', 'FerStatus').objects.get(uid=uid).delete()
+        apps.get_model('Patent', 'HearingStatus').objects.get(uid=uid).delete()
+    elif 'novelty search' in patent.patenttype:
+        apps.get_model('Patent', 'NoveltyStatus').objects.get(uid=uid).delete()
+    elif 'drafting' in patent.patenttype:
+        apps.get_model('Patent', 'DraftingStatus').objects.get(uid=uid).delete()
+    elif 'drawing' in patent.patenttype:
+        apps.get_model('Patent', 'DrawingStatus').objects.get(uid=uid).delete()
+    elif 'documentation' in patent.patenttype:
+        apps.get_model('Patent', 'DocumentationStatus').objects.get(uid=uid).delete()
+    elif 'filing' in patent.patenttype:
+        apps.get_model('Patent', 'FilingStatus').objects.get(uid=uid).delete()
+    elif 'examination' in patent.patenttype:
+        apps.get_model('Patent', 'ExaminationSatus').objects.get(uid=uid).delete()
+    elif 'FER' in patent.patenttype:
+        apps.get_model('Patent', 'FerStatus').objects.get(uid=uid).delete()
+    elif 'hearing' in patent.patenttype:
+        apps.get_model('Patent', 'HearingStatus').objects.get(uid=uid).delete()
     patent.delete()
     return redirect('user/login')
 

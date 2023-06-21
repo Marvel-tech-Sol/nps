@@ -10,7 +10,7 @@ class Patentapplication(models.Model):
     referedby = models.CharField(max_length=100)
     conntactnumber = models.CharField(max_length=10)
     emailid = models.EmailField(max_length=50)
-    patenttype = models.CharField(max_length=30)
+    patenttype = models.CharField(max_length=100)
     status = models.BooleanField(default=False)
     date = models.DateField()
     nda = models.CharField(max_length=30)

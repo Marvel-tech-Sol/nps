@@ -17,14 +17,12 @@ def loginuser(r):
         if r.method == 'POST':
             username = r.POST['username']
             password = r.POST['password']
-            print(username)
             user = authenticate(username=username, password=password)
             if user:
                 login(r, user)
                 userModel = models.Usermodel.objects.get(username=username)
                 team = userModel.teamname
                 if team == 'admin':
-                    print('admin')
                     return redirect('adminpanel/')
                 elif team == 'drawing':
                     c = apps.get_model('Patent', 'Patentapplication')
@@ -36,7 +34,6 @@ def loginuser(r):
                     c = apps.get_model('Patent', 'Patentapplication')
                     ro = c.objects.all()
                     DraftingStatus = apps.get_model('Patent', 'DraftingStatus')
-                    print(DraftingStatus)
                     return render(r, 'Patent/Draftingtable.html', {'r': ro,'d': DraftingStatus.objects.all()})
                 elif team == 'documentation':
                     c = apps.get_model('Patent', 'Patentapplication')
@@ -56,6 +53,10 @@ def loginuser(r):
                     return redirect('copyright/table')
                 elif team == 'mainadmin':
                     return redirect('adminpanel/')
+                elif team == 'FER':
+                    fer = FerStatus.objects.all()
+                    c = apps.get_model('Patent', 'Patentapplication').objects.all()
+                    return render(r, 'Patent/FER.html', {'c': c, 'fer': fer})
             else:
                 messages.error(r, "user not found")
             return render(r, 'user/login.html')
@@ -71,7 +72,7 @@ def loginuser(r):
             d1 = apps.get_model('Patent', 'DrawingStatus')
             d = d1.objects.all()
             ro = c.objects.all()
-            return render(r, 'Patent/Drawingtable.html', {'r': ro, 's': d})
+            return render(r, 'Patent/Drawingtable.html', {'r': ro, 'd': d})
         elif team == 'drafting':
             DraftingStatus = apps.get_model('Patent', 'DraftingStatus')
             print(DraftingStatus)
@@ -100,7 +101,6 @@ def loginuser(r):
             fer = FerStatus.objects.all()
             c = apps.get_model('Patent', 'Patentapplication').objects.all()
             return render(r,'Patent/FER.html',{'c':c,'fer':fer})
-            pass
         elif team == 'ideadevelopment':
             pass
     return render(r, 'user/login.html')
@@ -117,8 +117,6 @@ def registeruser(request):
             user = User.objects.create_user(username=email, email=email, password=password)
             user.first_name = name
             user.save()
-            user_auth = authenticate(username=email, password=password)
-            login(request, user_auth)
             models.Usermodel(username=email, teamname=team, name=name).save()
             return redirect('user/displayuser')
         else:

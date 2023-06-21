@@ -49,6 +49,7 @@
               <th>Title</th>
                <th>Organisation</th>
                <th>status</th>
+               <th>Approved</th>
                <th></th>
              </tr>
              {% for i in r %}
@@ -62,6 +63,11 @@
                 <td style="color:green;">Completed</td>
                 {% else %}
                 <td style="color:red;">Pending</td>
+                {% endif %}
+                {% if j.approved %}
+                 <td style="color:green;">Approved</td>
+                {% else %}
+                 <td style="color:red;">No</td>
                 {% endif %}
                 <td><a type="button btn-primary"
             style="background-color: #1694d8;padding:10px;text-decoration:none ;color: white;border-color: #1694d8;"

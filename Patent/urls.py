@@ -27,10 +27,12 @@ urlpatterns=[
     path('approvenovelty/<str:uid>',views.approvenovelty,name = 'approvenovelty/'),
     path('approvedrafting/<str:uid>',views.approvedraft,name = 'approvedrafting/'),
     path('approvefer/<str:uid>',views.approvefer,name = 'approvefer/'),
+    path('approvedrawing/<str:uid>',views.approvedrawing,name = 'approvedrawing/'),
 
 
     #reassign
     path('reassignnovelty/<str:uid>',views.reassignnovelty,name='reassignnovelty/'),
     path('reassigdrafting/<str:uid>',views.reassigndraft,name='reassigdrafting/'),
     path('reassigfer/<str:uid>',views.reassignfer,name='reassigfer/'),
+    path('reassigdrawing/<str:uid>',views.reassigndrawing,name='reassigdrawing/'),
 ]

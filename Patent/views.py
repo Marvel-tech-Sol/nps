@@ -2,8 +2,9 @@ import random
 
 from django.apps import apps
 from django.shortcuts import render, redirect
-from .models import Patentapplication, NDAStatus, PaymentStatus, NoveltyStatus, DocumentationStatus, DrawingStatus, \
-    DraftingStatus, FerStatus, ExaminationSatus, FilingStatus, HearingStatus, GrantsStatus, Assignedto
+
+import Patent
+from .models import *
 
 
 def random_string(ReferedBy):
@@ -72,20 +73,22 @@ def Patentapplicationview(request):
         NDAStatus(uid=uid, status=True, nda=nda).save()
         if  'novelty search' in type:
             NoveltyStatus(uid=uid, status=False).save()
-        if  'drafting' in type:
+        elif  'drafting' in type:
             DraftingStatus(uid=uid, status=False).save()
-        if 'drawing' in type:
+        elif 'drawing' in type:
             DrawingStatus(uid=uid, status=False).save()
-        if 'documentation' in type:
+        elif 'documentation' in type:
             DocumentationStatus(uid=uid, status=False).save()
-        if 'filing' in type:
+        elif 'filing' in type:
             FilingStatus(uid=uid, status=False).save()
-        if 'examination' in type:
+        elif 'examination' in type:
             ExaminationSatus(uid=uid, status=False).save()
-        if 'FER' in type:
+        elif 'FER' in type:
             FerStatus(uid=uid, status=False).save()
-        if 'hearing' in type:
+        elif 'hearing' in type:
             HearingStatus(uid=uid, status=False).save()
+        elif 'Idea Development' in type:
+            IdeaDevelopmentStatus(uid=uid,status = False).save()
         GrantsStatus(uid=uid, status=False).save()
         PaymentStatus(uid=uid, status=False).save()
         Assignedto(uid=uid, assignstatus=True, assignto=assignto).save()
@@ -198,7 +201,20 @@ def ExaminationSatusdata(r):
         r.save()
     return redirect('user/login')
 
+def ideadevelopmentstatusview(r,uid):
+    return render(r,'Patent/idedevelopmentstatus.html',{'c':Patentapplication.objects.get(uid=uid),'idea':IdeaDevelopmentStatus.objects.get(uid=uid)})
 
+def Ideastatusdata(r):
+    if r.method == 'POST':
+        uid = r.POST['uid']
+        fer = IdeaDevelopmentStatus.objects.get(uid=uid)
+        fer.status = True
+        fer.duedate = r.POST['duedate']
+        fer.assignto = r.POST['assignto']
+        fer.rating = r.POST['rating']
+        fer.qc = r.POST['qc']
+        fer.save()
+    return redirect('user/login')
 def FerStatusdata(r):
     if r.method == 'POST':
         uid = r.POST['uid']
@@ -258,6 +274,7 @@ def paymentStatus(r):
         p.amount = amount
         p.save()
     return redirect('user/login')
+
 
 def approvenovelty(r,uid):
     n = NoveltyStatus.objects.get(uid=uid)

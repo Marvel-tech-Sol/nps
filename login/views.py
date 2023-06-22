@@ -44,6 +44,9 @@ def loginuser(r):
                     ro = c.objects.all()
                     NoveltyStatus = apps.get_model('Patent', 'NoveltyStatus')
                     return render(r, 'Patent/Patentabilitysearchtable.html', {'r': ro,'NoveltyStatus': NoveltyStatus.objects.all()})
+                elif team == 'Idea':
+                    return render(r,'Patent/ideadevelopmenttable.html',{'r':apps.get_model('Patent', 'Patentapplication').objects.all(),
+                                                                        'd':apps.get_model('Patent','IdeaDevelopmentStatus').objects.all()})
                 elif team == 'trademark':
                     return redirect('trademark/table')
                 elif team == 'design':
@@ -89,6 +92,10 @@ def loginuser(r):
             ro = c.objects.all()
             return render(r, 'Patent/Patentabilitysearchtable.html',
                           {'r': ro, 'NoveltyStatus': NoveltyStatus.objects.all()})
+        elif team == 'Idea':
+            return render(r, 'Patent/ideadevelopmenttable.html',
+                          {'r': apps.get_model('Patent', 'Patentapplication').objects.all(),
+                           'd': apps.get_model('Patent', 'IdeaDevelopmentStatus').objects.all()})
         elif team == 'trademark':
             return redirect('trademark/table')
         elif team == 'design':

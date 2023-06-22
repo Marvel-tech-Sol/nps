@@ -67,6 +67,8 @@ def Editapplication(r, uid):
         c = {'FerStatus': FerStatus.objects.get(uid=uid), }
     elif 'hearing' in patent.patenttype:
         c = {'HearingStatus': HearingStatus.objects.get(uid=uid)}
+    elif 'Idea Development' in patent.patenttype:
+        c={'idea':apps.get_model('Patent','IdeaDevelopmentStatus').objects.get(uid=uid)}
     co = {**context, **c}
     return render(r, 'Patent/editappliaction.html', co)
 

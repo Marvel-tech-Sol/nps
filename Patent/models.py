@@ -132,6 +132,17 @@ class GrantsStatus(models.Model):
     def __str__(self):
         return self.uid
 
+class IdeaDevelopmentStatus(models.Model):
+    status = models.BooleanField(default=False)
+    uid = models.CharField(max_length=20)
+    rating = models.CharField(max_length=20)
+    assignto = models.CharField(max_length=50)
+    duedate = models.DateField(max_length=20, null=True)
+    qc = models.CharField(max_length=20)
+    drawings = models.CharField(max_length=30)
+    approved = models.BooleanField(default=False)
+    def __str__(self):
+        return self.uid
 
 class Assignedto(models.Model):
     uid = models.CharField(max_length=20)

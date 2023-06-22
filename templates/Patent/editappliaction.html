@@ -61,7 +61,7 @@ input[type=text],input[type=date], select {
 </center>
 <hr>
 <center>
-    <div style="width:100%;flex-wrap:wrap;margin:20px;justify-items:space-between;margin-left:40px;margin-botton:0;">
+    <div style="width:100%;flex-wrap:wrap;margin:10px;justify-items:space-between;margin-left:0px;margin-botton:0;">
     {% if assign.assignstatus %}
         <form action="{% url 'assignto' %}" method="post">
             {% csrf_token %}
@@ -75,17 +75,18 @@ input[type=text],input[type=date], select {
 </select>
             <button type="submit" class="but2" style="margin:10px;width:10%;padding:8px 20px; margin-bottom:0;">Submit</button>
         </form>
-
+<hr>
     {% endif %}
     </div>
 </center>
-<hr><!-- NDA  -->
+<!-- NDA  -->
 <center>
     <div class="container2">
 
      <p style="">NDA</p>
         {% if  ndastatus.status %}
         <p style="color:green;">{{ndastatus.nda}}</p>
+        <hr>
         {% else %}
         <form action="{% url 'ndastatus' %}" method="post">
               {% csrf_token %}
@@ -102,10 +103,9 @@ input[type=text],input[type=date], select {
           </form>
            </div>
 </center>
-<hr>
-<br>
+
+<br><hr>
         {% endif %}
-<hr>
 
 <!-- end NDA -->
 <!-- novelty  -->
@@ -383,11 +383,52 @@ input[type=text],input[type=date], select {
     </div>
     <!-- end documentation -->
 </center>
+    <center>
+{% if 'Idea Development' in app.patenttype %}
+    <div class="container">
+        <br>
+        <br>
+        <button style ="color:rgb(255, 255, 255) " class="but2">Idea Development</button><br>
+         {% if idea.status %}
+        <p style="color:green;">Idea Development Completed</p>
+        <div style="width:70%;display:flex;flex-wrap:wrap;justify-items:space-between;margin-left:40px;overflow:hidden;">
+      <label
+          style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Due Date</label>
 
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{idea.duedate}}</p>
+       <label
+          style='align-items: center;font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Rating</label>
 
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{idea.rating}}</p>
+       <label
+          style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Q.C.</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{idea.qc}}</p>
+       <label
+          style='align-items: center; font-size: 16px;color: #0d9bd3;font-weight: bold;margin-left:30px;'>Assign To</label>
+
+    <p style="color:green;font-size:18px;margin-left:20px; ">{{idea.assignto}}</p>
+
+            {% if idea.approved %}
+        <p style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn"> Approved</p>
+        {% else %}
+        <p>
+        <a href="{% url 'approvedrafting/' app.uid %}" style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Approve</a>
+        </p>
+         <p>
+        <a href="{% url 'reassigdrafting/' app.uid %}" style="background-color: red;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Reassign</a>
+        </p>
+        {% endif %}
+    </div>
+        {% else %}
+          </div> <p style="color:red;font-size:18px;margin-left:20px; ">Pending</p>
+            {% endif %}
+
+{% endif %}
+    </center>
 <center>
     <!-- filing -->
-    {% if app.patenttype == 'full' or app.patenttype == 'filing' %}
+    {% if app.patenttype == 'full' or 'filing' in app.patenttype %}
     <div class="container">
         <br>
         <br>

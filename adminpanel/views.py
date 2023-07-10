@@ -1,5 +1,6 @@
 import os
 
+from django.contrib.auth import logout
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.apps import apps
@@ -223,3 +224,10 @@ def deleteApp(r, uid):
     patent.delete()
     return redirect('user/login')
 
+# errors
+def error_404(r,e):
+    return redirect('user/login')
+
+def error_500(r):
+    logout(r)
+    return redirect('user/login')

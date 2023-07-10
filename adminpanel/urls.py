@@ -1,4 +1,6 @@
 from django.urls import path
+
+import adminpanel.views
 from . import views
 
 urlpatterns = [

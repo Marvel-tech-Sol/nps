@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from adminpanel import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('login.urls'), name='user'),
@@ -26,3 +28,5 @@ urlpatterns = [
     path('design/', include('Design.urls')),
     path('trademark/', include('Trademark.urls')),
 ]
+handler404 = views.error_404
+handler500 = views.error_500

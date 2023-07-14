@@ -221,10 +221,7 @@ input[type=text],input[type=date], select {
         <p style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn"> Approved</p>
         {% else %}
         <p>
-        <a href="{% url 'approvedrafting/' app.uid %}" style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Approve</a>
-        </p>
-         <p>
-        <a href="{% url 'reassigdrafting/' app.uid %}" style="background-color: red;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Reassign</a>
+        <a href="{% url 'approvedrafting/' app.uid %}" style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Recieved</a>
         </p>
         {% endif %}
     </div>
@@ -306,11 +303,11 @@ input[type=text],input[type=date], select {
         <p style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn"> Approved</p>
         {% else %}
         <p>
-        <a href="{% url 'approvedrawing/' app.uid %}" style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Approve</a>
+        <a href="{% url 'approvedrawing/' app.uid %}" style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Recieved</a>
         </p>
-         <p>
-        <a href="{% url 'reassigdrawing/' app.uid %}" style="background-color: red;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Reassign</a>
-        </p>
+<!--         <p>-->
+<!--        <a href="{% url 'reassigdrawing/' app.uid %}" style="background-color: red;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Reassign</a>-->
+<!--        </p>-->
         {% endif %}
     </div>
         {% else %}
@@ -413,11 +410,11 @@ input[type=text],input[type=date], select {
         <p style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn"> Approved</p>
         {% else %}
         <p>
-        <a href="{% url 'approvedrafting/' app.uid %}" style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Approve</a>
+        <a href="{% url 'approvedrafting/' app.uid %}" style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Recieved</a>
         </p>
-         <p>
-        <a href="{% url 'reassigdrafting/' app.uid %}" style="background-color: red;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Reassign</a>
-        </p>
+<!--         <p>-->
+<!--        <a href="{% url 'reassigdrafting/' app.uid %}" style="background-color: red;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Reassign</a>-->
+<!--        </p>-->
         {% endif %}
     </div>
         {% else %}
@@ -497,11 +494,11 @@ input[type=text],input[type=date], select {
         <p style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn"> Approved</p>
         {% else %}
         <p>
-        <a href="{% url 'approvefer/' app.uid %}" style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Approve</a>
+        <a href="{% url 'approvefer/' app.uid %}" style="background-color: green;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Recieved</a>
         </p>
-         <p>
-        <a href="{% url 'reassigfer/' app.uid %}" style="background-color: red;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Reassign</a>
-        </p>
+<!--         <p>-->
+<!--        <a href="{% url 'reassigfer/' app.uid %}" style="background-color: red;padding:10px 30px;text-decoration:none ;color: white;border-color: #1694d8;float:right;margin-left:150px;"  class="btn">Reassign</a>-->
+<!--        </p>-->
         {% endif %}
     </div>
         {% else %}
@@ -641,5 +638,6 @@ input[type=text],input[type=date], select {
          <button  style ="float:right; color:rgb(255, 255, 255); background-color:red;" class="but2" type="submit">Close Application</button>
 </form>
 {% endif %}
+</center>
 </body>
 </html> 
